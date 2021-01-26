@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Георгий Найфонов](https://up.htmlacademy.ru/javascript/22/user/1035371).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Хабиров](https://htmlacademy.ru/profile/alex_khab).
 
 ---
 
