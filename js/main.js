@@ -1,24 +1,33 @@
-// Gets random number
-// https://learn.javascript.ru/task/random-int-min-max
-const randomNumber = (min, max) => {
+const getNumberInRange = (min, max) => {
   return min + Math.random() * (max + 1 - min);
 }
 
-// Gets random integer number
-const randomInteger = (min, max) => {
-  let rand = randomNumber(min, max);
 
-  // Error values
-  return ((min >= max) || (min < 0) || (max < 0)) ? ('error') : (Math.floor(rand));
+const randomIntegerInRange = (min, max) => {
+  const rand = getNumberInRange(min, max);
+
+  if (min >= max || min < 0 || max < 0) {
+    // eslint-disable-next-line no-console
+    console.log('error');
+    return;
+  }
+
+  return (Math.floor(rand));
 }
 
-randomInteger(10, 20);
 
-// Gets random coordinate
-const mapCoordinates = (min, max, symbolNumber) => {
-  let rand = randomNumber(min, max);
+const getMapCoordinates = (min, max, symbolNumber = 1) => {
+  const rand = getNumberInRange(min, max);
 
-  return ((min >= max) || (min < 0) || (max < 0)) ? ('error') : rand.toFixed(symbolNumber);
+  if (min >= max || min < 0 || max < 0) {
+    // eslint-disable-next-line no-console
+    console.log('error');
+    return;
+  }
+
+  return rand.toFixed(symbolNumber);
 }
 
-mapCoordinates(10, 20, 3);
+
+randomIntegerInRange(10, 20);
+getMapCoordinates(10, 20, 3);
