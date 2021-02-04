@@ -103,7 +103,7 @@ const createOffer = () => {
   return {
     title: TITLES[getRandomIntegerInRange(0, TITLES.length - 1)],
     address: getAddress(),
-    price: ,
+    price: getRandomIntegerInRange(0, 1000000),
     type: '',
     rooms: '',
     guests: '',
