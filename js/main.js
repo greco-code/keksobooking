@@ -72,7 +72,7 @@ const getRandomIntegerInRange = (min, max) => {
 }
 
 
-const getMapCoordinates = (min, max, symbolNumber = 1) => {
+const getRandomFloatingNumber = (min, max, symbolNumber = 1) => {
   const rand = getNumberInRange(min, max);
 
   if (min >= max || min < 0 || max < 0) {
@@ -85,12 +85,45 @@ const getMapCoordinates = (min, max, symbolNumber = 1) => {
 }
 
 
-const createAuthor = () => {
+const getAuthor = () => {
   let avatar;
   avatar = 'img/avatars/user0' + getRandomIntegerInRange(1, 8) + '.png';
 
   return avatar;
 }
+
+const getAddress = () => {
+  return  {
+    x: getRandomFloatingNumber(35.65000, 35.70000, 5),
+    y:  getRandomFloatingNumber(139.70000, 139.80000, 5),
+  }
+}
+
+const createOffer = () => {
+  return {
+    title: TITLES[getRandomIntegerInRange(0, TITLES.length - 1)],
+    address: getAddress(),
+    price: ,
+    type: '',
+    rooms: '',
+    guests: '',
+    checkin: '',
+    checkout: '',
+    features: '',
+    description: '',
+    photos: '',
+  }
+}
+
+console.log(createOffer());
+
+// const authors = new Array(SIMILAR_WIZARD_COUNT).fill(null).map(() => createWizard());
+
+// const createOffer = () => {
+
+// }
+
+
 
 
 
