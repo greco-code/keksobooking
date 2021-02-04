@@ -9,7 +9,7 @@ const TITLES = [
 ]
 
 
-const TYPE = [
+const TYPES = [
   'palace',
   'flat',
   'house',
@@ -40,7 +40,7 @@ const FEAUTRES = [
   'conditioner',
 ]
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Топовая комнатка',
   'АААгонь просто',
   'Збс помещение',
@@ -103,8 +103,9 @@ const createOffer = () => {
   return {
     title: TITLES[getRandomIntegerInRange(0, TITLES.length - 1)],
     address: getAddress(),
+    //todo add min price to type
     price: getRandomIntegerInRange(0, 1000000),
-    type: '',
+    type: TYPES[getRandomIntegerInRange(0, TYPES.length - 1)],
     rooms: '',
     guests: '',
     checkin: '',
