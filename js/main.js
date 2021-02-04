@@ -107,7 +107,7 @@ const createOffer = () => {
     price: getRandomIntegerInRange(0, 1000000),
     type: TYPES[getRandomIntegerInRange(0, TYPES.length - 1)],
     rooms: getRandomIntegerInRange(1, 100),
-    guests: '',
+    guests: getRandomIntegerInRange(1, 100),
     checkin: '',
     checkout: '',
     features: '',
