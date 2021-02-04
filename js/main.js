@@ -1,9 +1,11 @@
+'use strict'
+
 const getNumberInRange = (min, max) => {
   return min + Math.random() * (max + 1 - min);
 }
 
 
-const randomIntegerInRange = (min, max) => {
+const getRandomIntegerInRange = (min, max) => {
   const rand = getNumberInRange(min, max);
 
   if (min >= max || min < 0 || max < 0) {
@@ -29,5 +31,9 @@ const getMapCoordinates = (min, max, symbolNumber = 1) => {
 }
 
 
-randomIntegerInRange(10, 20);
-getMapCoordinates(10, 20, 3);
+const createAuthor = () => {
+  let avatar;
+  avatar = 'img/avatars/user0' + getRandomIntegerInRange(1, 8) + '.png';
+  return avatar;
+}
+
