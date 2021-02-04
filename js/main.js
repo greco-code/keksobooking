@@ -17,14 +17,14 @@ const TYPES = [
 ]
 
 
-const CHEKCIN = [
+const CHECKIN = [
   '12:00',
   '13:00',
   '14:00',
 ]
 
 
-const CHEKCOUT = [
+const CHECKOUT = [
   '12:00',
   '13:00',
   '14:00',
@@ -108,8 +108,8 @@ const createOffer = () => {
     type: TYPES[getRandomIntegerInRange(0, TYPES.length - 1)],
     rooms: getRandomIntegerInRange(1, 100),
     guests: getRandomIntegerInRange(1, 100),
-    checkin: '',
-    checkout: '',
+    checkin: CHECKIN[getRandomIntegerInRange(0, CHECKIN.length - 1)],
+    checkout: CHECKOUT[getRandomIntegerInRange(0, CHECKOUT.length - 1)],
     features: '',
     description: '',
     photos: '',
