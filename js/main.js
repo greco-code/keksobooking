@@ -106,7 +106,7 @@ const createOffer = () => {
     //todo add min price to type
     price: getRandomIntegerInRange(0, 1000000),
     type: TYPES[getRandomIntegerInRange(0, TYPES.length - 1)],
-    rooms: '',
+    rooms: getRandomIntegerInRange(1, 100),
     guests: '',
     checkin: '',
     checkout: '',
