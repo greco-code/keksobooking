@@ -1,5 +1,59 @@
 'use strict'
 
+const TITLES = [
+  'Hello world1',
+  'Hello world2',
+  'Hello world3',
+  'Hello world4',
+  'Hello world5',
+]
+
+
+const TYPE = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+]
+
+
+const CHEKCIN = [
+  '12:00',
+  '13:00',
+  '14:00',
+]
+
+
+const CHEKCOUT = [
+  '12:00',
+  '13:00',
+  '14:00',
+]
+
+
+const FEAUTRES = [
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+]
+
+const DESCRIPTION = [
+  'Топовая комнатка',
+  'АААгонь просто',
+  'Збс помещение',
+  'Я программирую на HTML',
+]
+
+const PHOTOS = [
+  'http://o0.github.io/assets/images/tokyo/hotel1.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
+  'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
+]
+
+
 const getNumberInRange = (min, max) => {
   return min + Math.random() * (max + 1 - min);
 }
@@ -34,6 +88,10 @@ const getMapCoordinates = (min, max, symbolNumber = 1) => {
 const createAuthor = () => {
   let avatar;
   avatar = 'img/avatars/user0' + getRandomIntegerInRange(1, 8) + '.png';
+
   return avatar;
 }
+
+
+
 
