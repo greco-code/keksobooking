@@ -31,7 +31,7 @@ const CHECKOUT = [
 ]
 
 
-const FEAUTRES = [
+const FEATURES = [
   'wifi',
   'dishwasher',
   'parking',
@@ -84,48 +84,62 @@ const getRandomFloatingNumber = (min, max, symbolNumber = 1) => {
   return rand.toFixed(symbolNumber);
 }
 
-
 const getAuthor = () => {
-  let avatar;
-  avatar = 'img/avatars/user0' + getRandomIntegerInRange(1, 8) + '.png';
-
-  return avatar;
-}
-
-const getAddress = () => {
   return  {
-    x: getRandomFloatingNumber(35.65000, 35.70000, 5),
-    y:  getRandomFloatingNumber(139.70000, 139.80000, 5),
+    avatar: 'img/avatars/user0' + getRandomIntegerInRange(1, 8) + '.png',
   }
 }
 
-const createOffer = () => {
+
+const getAddress = () => {
+  return {
+    x: getRandomFloatingNumber(35.65000, 35.70000, 5),
+    y: getRandomFloatingNumber(139.70000, 139.80000, 5),
+  }
+}
+
+
+const getFeatures = () => {
+  let featuresList = [];
+
+  FEATURES.forEach((f) => {
+    if (getRandomIntegerInRange(0, 2)) {
+      return;
+    }
+
+    featuresList.push(f);
+  })
+
+  return featuresList;
+}
+
+
+const photosList = new Array(getRandomIntegerInRange(1, PHOTOS.length)).fill(null).map(() => PHOTOS[getRandomIntegerInRange(0, PHOTOS.length - 1)]);
+
+
+const getOffer = () => {
   return {
     title: TITLES[getRandomIntegerInRange(0, TITLES.length - 1)],
     address: getAddress(),
-    //todo add min price to type
     price: getRandomIntegerInRange(0, 1000000),
     type: TYPES[getRandomIntegerInRange(0, TYPES.length - 1)],
     rooms: getRandomIntegerInRange(1, 100),
     guests: getRandomIntegerInRange(1, 100),
     checkin: CHECKIN[getRandomIntegerInRange(0, CHECKIN.length - 1)],
     checkout: CHECKOUT[getRandomIntegerInRange(0, CHECKOUT.length - 1)],
-    features: '',
-    description: '',
-    photos: '',
+    features: getFeatures(),
+    description: DESCRIPTIONS[getRandomIntegerInRange(0, DESCRIPTIONS.length - 1)],
+    photos: photosList,
   }
 }
 
-console.log(createOffer());
 
-// const authors = new Array(SIMILAR_WIZARD_COUNT).fill(null).map(() => createWizard());
+const getObject = () => {
+  return  {
+    author: getAuthor(),
+    offer: getOffer(),
+    location: getAddress(),
+  }
+}
 
-// const createOffer = () => {
-
-// }
-
-
-
-
-
-
+getObject();
