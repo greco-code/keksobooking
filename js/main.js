@@ -8,7 +8,6 @@ const TITLES = [
   'Hello world5',
 ]
 
-
 const TYPES = [
   'palace',
   'flat',
@@ -16,20 +15,17 @@ const TYPES = [
   'bungalow',
 ]
 
-
 const CHECKIN = [
   '12:00',
   '13:00',
   '14:00',
 ]
 
-
 const CHECKOUT = [
   '12:00',
   '13:00',
   '14:00',
 ]
-
 
 const FEATURES = [
   'wifi',
@@ -53,11 +49,12 @@ const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ]
 
+const OBJECT_COUNT = 10;
+
 
 const getNumberInRange = (min, max) => {
   return min + Math.random() * (max + 1 - min);
 }
-
 
 const getRandomIntegerInRange = (min, max) => {
   const rand = getNumberInRange(min, max);
@@ -71,7 +68,6 @@ const getRandomIntegerInRange = (min, max) => {
   return (Math.floor(rand));
 }
 
-
 const getRandomFloatingNumber = (min, max, symbolNumber = 1) => {
   const rand = getNumberInRange(min, max);
 
@@ -84,12 +80,7 @@ const getRandomFloatingNumber = (min, max, symbolNumber = 1) => {
   return rand.toFixed(symbolNumber);
 }
 
-const getAuthor = () => {
-  return  {
-    avatar: 'img/avatars/user0' + getRandomIntegerInRange(1, 8) + '.png',
-  }
-}
-
+const getRandomArray = (arr) => arr[getRandomIntegerInRange(0, arr.length - 1)];
 
 const getAddress = () => {
   return {
@@ -98,12 +89,11 @@ const getAddress = () => {
   }
 }
 
-
 const getFeatures = () => {
-  let featuresList = [];
+  const featuresList = [];
 
   FEATURES.forEach((f) => {
-    if (getRandomIntegerInRange(0, 2)) {
+    if (Math.random() > 0.5) {
       return;
     }
 
@@ -114,32 +104,35 @@ const getFeatures = () => {
 }
 
 
-const photosList = new Array(getRandomIntegerInRange(1, PHOTOS.length)).fill(null).map(() => PHOTOS[getRandomIntegerInRange(0, PHOTOS.length - 1)]);
-
-
-const getOffer = () => {
-  return {
-    title: TITLES[getRandomIntegerInRange(0, TITLES.length - 1)],
-    address: getAddress(),
-    price: getRandomIntegerInRange(0, 1000000),
-    type: TYPES[getRandomIntegerInRange(0, TYPES.length - 1)],
-    rooms: getRandomIntegerInRange(1, 100),
-    guests: getRandomIntegerInRange(1, 100),
-    checkin: CHECKIN[getRandomIntegerInRange(0, CHECKIN.length - 1)],
-    checkout: CHECKOUT[getRandomIntegerInRange(0, CHECKOUT.length - 1)],
-    features: getFeatures(),
-    description: DESCRIPTIONS[getRandomIntegerInRange(0, DESCRIPTIONS.length - 1)],
-    photos: photosList,
-  }
-}
-
+const photosList = new Array(getRandomIntegerInRange(1, PHOTOS.length))
+  .fill(null)
+  .map(() => getRandomArray(PHOTOS));
 
 const getObject = () => {
-  return  {
-    author: getAuthor(),
-    offer: getOffer(),
-    location: getAddress(),
+  const coordinates = getAddress();
+
+  return {
+    author: `img/avatars/user0${getRandomIntegerInRange(1, 8)}.png`,
+    offer: {
+      title: getRandomArray(TITLES),
+      address: coordinates,
+      price: getRandomIntegerInRange(0, 1000000),
+      type: getRandomArray(TYPES),
+      rooms: getRandomIntegerInRange(1, 100),
+      guests: getRandomIntegerInRange(1, 100),
+      checkin: getRandomArray(CHECKIN),
+      checkout: getRandomArray(CHECKOUT),
+      features: getFeatures(),
+      description: getRandomArray(DESCRIPTIONS),
+      photos: photosList,
+    },
+    location: coordinates,
   }
 }
 
-getObject();
+const objectsList = new Array(OBJECT_COUNT)
+  .fill(null)
+  .map(() => getObject());
+
+// eslint-disable-next-line no-console
+console.log(objectsList);
