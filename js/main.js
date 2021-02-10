@@ -80,7 +80,11 @@ const getRandomFloatingNumber = (min, max, symbolNumber = 1) => {
   return rand.toFixed(symbolNumber);
 }
 
-const getRandomArray = (arr) => arr[getRandomIntegerInRange(0, arr.length - 1)];
+const getRandomArrayElement = (arr) => arr[getRandomIntegerInRange(0, arr.length - 1)];
+
+const getNoRepeatElements = (arr) => {
+  return arr.filter(() => Math.random() > 0.5);
+}
 
 const getAddress = () => {
   return {
@@ -89,50 +93,35 @@ const getAddress = () => {
   }
 }
 
-const getFeatures = () => {
-  const featuresList = [];
-
-  FEATURES.forEach((f) => {
-    if (Math.random() > 0.5) {
-      return;
-    }
-
-    featuresList.push(f);
-  })
-
-  return featuresList;
-}
-
-
 const photosList = new Array(getRandomIntegerInRange(1, PHOTOS.length))
   .fill(null)
-  .map(() => getRandomArray(PHOTOS));
+  .map(() => getRandomArrayElement(PHOTOS));
 
-const getObject = () => {
+const createOffer = () => {
   const coordinates = getAddress();
 
   return {
     author: `img/avatars/user0${getRandomIntegerInRange(1, 8)}.png`,
     offer: {
-      title: getRandomArray(TITLES),
+      title: getRandomArrayElement(TITLES),
       address: coordinates,
       price: getRandomIntegerInRange(0, 1000000),
-      type: getRandomArray(TYPES),
+      type: getRandomArrayElement(TYPES),
       rooms: getRandomIntegerInRange(1, 100),
       guests: getRandomIntegerInRange(1, 100),
-      checkin: getRandomArray(CHECKIN),
-      checkout: getRandomArray(CHECKOUT),
-      features: getFeatures(),
-      description: getRandomArray(DESCRIPTIONS),
+      checkin: getRandomArrayElement(CHECKIN),
+      checkout: getRandomArrayElement(CHECKOUT),
+      features: getNoRepeatElements(FEATURES),
+      description: getRandomArrayElement(DESCRIPTIONS),
       photos: photosList,
     },
     location: coordinates,
   }
 }
 
-const objectsList = new Array(OBJECT_COUNT)
+const offerList = new Array(OBJECT_COUNT)
   .fill(null)
-  .map(() => getObject());
+  .map(() => createOffer());
 
 // eslint-disable-next-line no-console
-console.log(objectsList);
+console.log(offerList);
