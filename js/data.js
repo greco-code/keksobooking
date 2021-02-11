@@ -79,6 +79,7 @@ const createOffer = () => {
       title: getRandomArrayElement(TITLES),
       address: coordinates,
       price: getRandomIntegerInRange(0, 1000000),
+      // price: 40,
       type: getRandomArrayElement(TYPES),
       rooms: getRandomIntegerInRange(1, 100),
       guests: getRandomIntegerInRange(1, 100),
@@ -98,5 +99,26 @@ const offerList = new Array(OBJECT_COUNT)
 
 // eslint-disable-next-line no-console
 console.log(offerList);
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TRAIN
+
+const getPriceFilter = (arr) => {
+  const priceFilterList = [];
+
+  arr.forEach((obj) => {
+    if (obj.offer.price < 500000) {
+      priceFilterList.push(obj);
+    }
+  })
+
+  return priceFilterList;
+}
+
+// eslint-disable-next-line no-console
+console.log(getPriceFilter(offerList));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export {offerList};
