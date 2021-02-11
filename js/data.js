@@ -1,11 +1,6 @@
 'use strict'
 
-import {
-  getRandomIntegerInRange,
-  getRandomFloatingNumber,
-  getRandomArrayElement,
-  getNoRepeatElements
-} from './util.js';
+import {getNoRepeatElements, getRandomArrayElement, getRandomFloatingNumber, getRandomIntegerInRange} from './util.js';
 
 
 const TITLES = [
@@ -120,15 +115,21 @@ const getPriceFilter = (arr) => {
 console.log(getPriceFilter(offerList));
 
 
+// const getSumPrice = (arr) => {
+//   let sumPrice = 0;
+//
+//   arr.forEach((obj) => {
+//     // console.log(obj.offer.price);
+//     sumPrice += obj.offer.price;
+//   })
+//
+//   return sumPrice;
+// }
+
 const getSumPrice = (arr) => {
-  let sumPrice = 0;
-
-  arr.forEach((obj) => {
-    // console.log(obj.offer.price);
-    sumPrice += obj.offer.price;
-  })
-
-  return sumPrice;
+  return arr.reduce((accumulator, obj) => {
+    return accumulator + obj.offer.price;
+  }, 0);
 }
 
 // eslint-disable-next-line no-console
@@ -151,5 +152,6 @@ console.log(getSortGuestList(offerList));
 export {
   offerList,
   getPriceFilter,
-  getSumPrice
+  getSumPrice,
+  getSortGuestList
 };
