@@ -134,6 +134,18 @@ const getSumPrice = (arr) => {
 // eslint-disable-next-line no-console
 console.log(getSumPrice(offerList));
 
+
+const getSortGuestList = (arr) => {
+  arr.sort(function (a, b) {
+    return a.offer.guests - b.offer.guests;
+  })
+
+  return arr;
+}
+
+// eslint-disable-next-line no-console
+console.log(getSortGuestList(offerList));
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export {
