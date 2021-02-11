@@ -119,6 +119,25 @@ const getPriceFilter = (arr) => {
 // eslint-disable-next-line no-console
 console.log(getPriceFilter(offerList));
 
+
+const getSumPrice = (arr) => {
+  let sumPrice = 0;
+
+  arr.forEach((obj) => {
+    // console.log(obj.offer.price);
+    sumPrice += obj.offer.price;
+  })
+
+  return sumPrice;
+}
+
+// eslint-disable-next-line no-console
+console.log(getSumPrice(offerList));
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export {offerList};
+export {
+  offerList,
+  getPriceFilter,
+  getSumPrice
+};
