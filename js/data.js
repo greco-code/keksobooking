@@ -1,6 +1,9 @@
-'use strict'
-
-import {getNoRepeatElements, getRandomArrayElement, getRandomFloatingNumber, getRandomIntegerInRange} from './util.js';
+import {
+  getNoRepeatElements,
+  getRandomArrayElement,
+  getRandomFloatingNumber,
+  getRandomIntegerInRange
+} from './util.js';
 
 
 const TITLES = [
@@ -74,7 +77,6 @@ const createOffer = () => {
       title: getRandomArrayElement(TITLES),
       address: coordinates,
       price: getRandomIntegerInRange(0, 1000000),
-      // price: 40,
       type: getRandomArrayElement(TYPES),
       rooms: getRandomIntegerInRange(1, 100),
       guests: getRandomIntegerInRange(1, 100),
@@ -88,13 +90,11 @@ const createOffer = () => {
   }
 }
 
-const offerList = new Array(OBJECT_COUNT)
-  .fill(null)
-  .map(() => createOffer());
-
-// eslint-disable-next-line no-console
-console.log(offerList);
-
+const createOfferList = () => {
+  return new Array(OBJECT_COUNT)
+    .fill(null)
+    .map(() => createOffer());
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TRAIN
@@ -112,45 +112,32 @@ const getPriceFilter = (arr) => {
 }
 
 // eslint-disable-next-line no-console
-console.log(getPriceFilter(offerList));
+console.log(getPriceFilter(createOfferList()));
 
-
-// const getSumPrice = (arr) => {
-//   let sumPrice = 0;
-//
-//   arr.forEach((obj) => {
-//     // console.log(obj.offer.price);
-//     sumPrice += obj.offer.price;
-//   })
-//
-//   return sumPrice;
-// }
 
 const getSumPrice = (arr) => {
-  return arr.reduce((accumulator, obj) => {
-    return accumulator + obj.offer.price;
+  return arr.reduce((acc, cur) => {
+    return acc + cur.offer.price;
   }, 0);
 }
 
 // eslint-disable-next-line no-console
-console.log(getSumPrice(offerList));
+console.log(getSumPrice(createOfferList()));
 
 
 const getSortGuestList = (arr) => {
-  arr.sort(function (a, b) {
-    return a.offer.guests - b.offer.guests;
-  })
+  arr.sort((a, b) => a.offer.guests - b.offer.guests)
 
   return arr;
 }
 
 // eslint-disable-next-line no-console
-console.log(getSortGuestList(offerList));
+console.log(getSortGuestList(createOfferList()));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export {
-  offerList,
+  createOfferList,
   getPriceFilter,
   getSumPrice,
   getSortGuestList
