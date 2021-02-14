@@ -96,49 +96,6 @@ const createOfferList = () => {
     .map(() => createOffer());
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// TRAIN
-
-const getPriceFilter = (arr) => {
-  const priceFilterList = [];
-
-  arr.forEach((obj) => {
-    if (obj.offer.price < 500000) {
-      priceFilterList.push(obj);
-    }
-  })
-
-  return priceFilterList;
-}
-
-// eslint-disable-next-line no-console
-console.log(getPriceFilter(createOfferList()));
-
-
-const getSumPrice = (arr) => {
-  return arr.reduce((acc, cur) => {
-    return acc + cur.offer.price;
-  }, 0);
-}
-
-// eslint-disable-next-line no-console
-console.log(getSumPrice(createOfferList()));
-
-
-const getSortGuestList = (arr) => {
-  arr.sort((a, b) => a.offer.guests - b.offer.guests)
-
-  return arr;
-}
-
-// eslint-disable-next-line no-console
-console.log(getSortGuestList(createOfferList()));
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 export {
-  createOfferList,
-  getPriceFilter,
-  getSumPrice,
-  getSortGuestList
+  createOfferList
 };

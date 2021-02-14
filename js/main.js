@@ -1,4 +1,2 @@
 import './data.js';
-import {createOfferList} from './data.js';
-
-createOfferList();
+import './popup.js'
