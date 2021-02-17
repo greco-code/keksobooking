@@ -1,5 +1,5 @@
 import './data.js';
 import './popup.js'
-import {fillMap} from './popup.js';
+import {createCard, similarOffers, map} from './popup.js';
 
-fillMap();
+map.appendChild(createCard(similarOffers[0]));

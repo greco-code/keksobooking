@@ -66,12 +66,10 @@ const createCard = (add) => {
   return singleOffer;
 }
 
-const fillMap = () => {
-  map.appendChild(createCard(similarOffers[0]));
+
+export {
+  createCard,
+  similarOffers,
+  map
 }
-
-
-// console.log(createCard(createOfferList()[0]));
-
-export {fillMap}
 
