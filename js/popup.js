@@ -20,8 +20,8 @@ const translateType = (type) => {
   }
 }
 
-const generateFeaturesList = (arr, clone) => {
-  const featuresList = clone.querySelector('.popup__features');
+const generateFeaturesList = (arr, element) => {
+  const featuresList = element.querySelector('.popup__features');
   featuresList.innerHTML = '';
 
   arr.forEach((item) => {
@@ -34,8 +34,8 @@ const generateFeaturesList = (arr, clone) => {
   return featuresList;
 }
 
-const generatePhotosList = (arr, clone) => {
-  const photosList = clone.querySelector('.popup__photos');
+const generatePhotosList = (arr, element) => {
+  const photosList = element.querySelector('.popup__photos');
   photosList.innerHTML = '';
 
   arr.forEach((item) => {
