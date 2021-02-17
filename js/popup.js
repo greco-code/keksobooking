@@ -5,7 +5,6 @@ const similarOffers = createOfferList();
 const offerTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
-const map = document.querySelector('#map-canvas');
 
 
 const translateType = (type) => {
@@ -82,7 +81,6 @@ const createCard = ({author, offer}) => {
 
 export {
   createCard,
-  similarOffers,
-  map
+  similarOffers
 }
 
