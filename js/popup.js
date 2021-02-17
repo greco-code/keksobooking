@@ -50,18 +50,18 @@ const generatePhotosList = (arr, element) => {
   return photosList;
 }
 
-const createCard = (add) => {
+const createCard = (offer) => {
   const singleOffer = offerTemplate.cloneNode(true);
-  singleOffer.querySelector('.popup__title').textContent = add.offer.title;
-  singleOffer.querySelector('.popup__text--address').textContent = add.offer.address;
-  singleOffer.querySelector('.popup__text--price').textContent = `${add.offer.price} ₽/ночь`;
-  singleOffer.querySelector('.popup__type').textContent = translateType(add.offer.type);
-  singleOffer.querySelector('.popup__text--capacity').textContent = `${add.offer.rooms}  команды для ${add.offer.guests} гостей.`;
-  singleOffer.querySelector('.popup__text--time').textContent = `Заезд после ${add.offer.checkin}  выезд до ${add.offer.checkout}`;
-  generateFeaturesList(add.offer.features, singleOffer);
-  singleOffer.querySelector('.popup__description').textContent = add.offer.description;
-  generatePhotosList(add.offer.photos, singleOffer);
-  singleOffer.querySelector('.popup__avatar').src = add.author;
+  singleOffer.querySelector('.popup__title').textContent = offer.offer.title;
+  singleOffer.querySelector('.popup__text--address').textContent = offer.offer.address;
+  singleOffer.querySelector('.popup__text--price').textContent = `${offer.offer.price} ₽/ночь`;
+  singleOffer.querySelector('.popup__type').textContent = translateType(offer.offer.type);
+  singleOffer.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms}  команды для ${offer.offer.guests} гостей.`;
+  singleOffer.querySelector('.popup__text--time').textContent = `Заезд после ${offer.offer.checkin}  выезд до ${offer.offer.checkout}`;
+  generateFeaturesList(offer.offer.features, singleOffer);
+  singleOffer.querySelector('.popup__description').textContent = offer.offer.description;
+  generatePhotosList(offer.offer.photos, singleOffer);
+  singleOffer.querySelector('.popup__avatar').src = offer.author;
   return singleOffer;
 }
 
