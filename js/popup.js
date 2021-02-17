@@ -59,22 +59,22 @@ const declGuests = (number) => {
   return declOfNum(number, ['гостя', 'гостей', 'гостей']);
 }
 
-const createCard = (offer) => {
+const createCard = ({author, offer}) => {
   const singleOffer = offerTemplate.cloneNode(true);
-  const roomsTotal = offer.offer.rooms;
-  const guestsTotal = offer.offer.guests;
+  const roomsTotal = offer.rooms;
+  const guestsTotal = offer.guests;
 
-  singleOffer.querySelector('.popup__title').textContent = offer.offer.title;
-  singleOffer.querySelector('.popup__text--address').textContent = offer.offer.address;
-  singleOffer.querySelector('.popup__text--price').textContent = `${offer.offer.price} ₽/ночь`;
-  singleOffer.querySelector('.popup__type').textContent = translateType(offer.offer.type);
+  singleOffer.querySelector('.popup__title').textContent = offer.title;
+  singleOffer.querySelector('.popup__text--address').textContent = offer.address;
+  singleOffer.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
+  singleOffer.querySelector('.popup__type').textContent = translateType(offer.type);
   singleOffer.querySelector('.popup__text--capacity').textContent = `${roomsTotal}  ${declRooms(roomsTotal)} для ${guestsTotal} ${declGuests(guestsTotal)}.`;
-  singleOffer.querySelector('.popup__text--time').textContent = `Заезд после ${offer.offer.checkin}  выезд до ${offer.offer.checkout}`;
-  singleOffer.querySelector('.popup__description').textContent = offer.offer.description;
-  singleOffer.querySelector('.popup__avatar').src = offer.author;
+  singleOffer.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}  выезд до ${offer.checkout}`;
+  singleOffer.querySelector('.popup__description').textContent = offer.description;
+  singleOffer.querySelector('.popup__avatar').src = author;
 
-  generateFeaturesList(offer.offer.features, singleOffer);
-  generatePhotosList(offer.offer.photos, singleOffer);
+  generateFeaturesList(offer.features, singleOffer);
+  generatePhotosList(offer.photos, singleOffer);
 
   return singleOffer;
 }
