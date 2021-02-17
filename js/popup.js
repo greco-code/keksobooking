@@ -26,8 +26,7 @@ const generateFeaturesList = (arr, element) => {
 
   arr.forEach((item) => {
     const featureItem = document.createElement('li');
-    featureItem.className = 'popup__feature';
-    featureItem.classList.add('popup__feature--' + item);
+    featureItem.className = `popup__feature popup__feature--${item}`;
     featuresList.appendChild(featureItem);
   })
 
