@@ -1,4 +1,7 @@
 import './data.js';
-import {createOfferList} from './data.js';
+import './popup.js'
+import {createCard, similarOffers} from './popup.js';
 
-createOfferList();
+const map = document.querySelector('#map-canvas');
+
+map.appendChild(createCard(similarOffers[0]));
