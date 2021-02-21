@@ -12,13 +12,10 @@ const priceToType = {
 }
 
 const onSelectCheckChange = (evt) => {
-  switch (evt.target) {
-    case timeIn:
-      timeOut.value = evt.target.value;
-      break;
-    case timeOut:
-      timeIn.value = evt.target.value;
-  }
+  const { value } = evt.target;
+
+  timeOut.value = value;
+  timeIn.value = value;
 }
 
 const onSelectTypeChange = () => {
