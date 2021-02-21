@@ -4,6 +4,12 @@ const timeOut = mainForm.querySelector('#timeout');
 const priceInput = mainForm.querySelector('#price');
 const propertyType = mainForm.querySelector('#type');
 
+const priceToType = {
+  bungalow: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000,
+}
 
 const syncSelect = (evt) => {
   switch (evt.target) {
@@ -13,13 +19,6 @@ const syncSelect = (evt) => {
     case timeOut:
       timeIn.value = evt.target.value;
   }
-}
-
-const priceToType = {
-  'bungalow': 0,
-  'flat': 1000,
-  'house': 5000,
-  'palace': 10000,
 }
 
 const syncPriceToType = () => {
