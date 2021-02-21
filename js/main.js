@@ -1,7 +1,5 @@
 import './data.js';
-import './popup.js';
-import './state.js';
-import {disableForms} from './state.js';
+import {createOffer, similarOffers} from './popup.js';
+import {validateForm} from './form.js';
 
 disableForms();
-
