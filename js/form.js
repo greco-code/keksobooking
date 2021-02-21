@@ -27,11 +27,9 @@ const onSelectTypeChange = () => {
 const validateForm = () => {
   onSelectTypeChange();
   propertyType.addEventListener('change', onSelectTypeChange);
-  priceInput.addEventListener('input', onSelectTypeChange);
   timeIn.addEventListener('change', onSelectCheckChange);
   timeOut.addEventListener('change', onSelectCheckChange);
 }
-
 
 export {validateForm};
 
