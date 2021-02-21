@@ -1,7 +1,6 @@
 import './data.js';
-import './popup.js'
-import {createCard, similarOffers} from './popup.js';
+import './popup.js';
+import './state.js';
+import {disableForms} from './state.js';
 
-const map = document.querySelector('#map-canvas');
-
-map.appendChild(createCard(similarOffers[0]));
+disableForms();
