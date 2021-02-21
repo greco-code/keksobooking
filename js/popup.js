@@ -53,7 +53,7 @@ const generatePhotosList = (arr, element) => {
   return photosList;
 }
 
-const createCard = ({author, offer}) => {
+const createOffer = ({author, offer}) => {
   const singleOffer = offerTemplate.cloneNode(true);
   const roomsTotal = declOfNum(offer.rooms, ROOM_WORDS);
   const guestsTotal = declOfNum(offer.guests, GUEST_WORDS);
@@ -75,7 +75,7 @@ const createCard = ({author, offer}) => {
 
 
 export {
-  createCard,
+  createOffer,
   similarOffers
 }
 
