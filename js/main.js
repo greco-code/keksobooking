@@ -1,7 +1,11 @@
 import './data.js';
-import './popup.js'
-import {createCard, similarOffers} from './popup.js';
+import {createOffer, similarOffers} from './popup.js';
+import {validateForm} from './form.js';
+
 
 const map = document.querySelector('#map-canvas');
 
-map.appendChild(createCard(similarOffers[0]));
+
+map.appendChild(createOffer(similarOffers[0]));
+
+validateForm();
