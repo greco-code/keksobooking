@@ -11,7 +11,7 @@ const priceToType = {
   palace: 10000,
 }
 
-const syncSelect = (evt) => {
+const onSelectCheckChange = (evt) => {
   switch (evt.target) {
     case timeIn:
       timeOut.value = evt.target.value;
@@ -21,18 +21,18 @@ const syncSelect = (evt) => {
   }
 }
 
-const syncPriceToType = () => {
+const onSelectTypeChange = () => {
   priceInput.min = priceToType[propertyType.value];
   priceInput.placeholder = priceToType[propertyType.value];
 }
 
 
 const validateForm = () => {
-  syncPriceToType();
-  propertyType.addEventListener('change', syncPriceToType);
-  priceInput.addEventListener('input', syncPriceToType);
-  timeIn.addEventListener('change', syncSelect);
-  timeOut.addEventListener('change', syncSelect);
+  onSelectTypeChange();
+  propertyType.addEventListener('change', onSelectTypeChange);
+  priceInput.addEventListener('input', onSelectTypeChange);
+  timeIn.addEventListener('change', onSelectCheckChange);
+  timeOut.addEventListener('change', onSelectCheckChange);
 }
 
 
