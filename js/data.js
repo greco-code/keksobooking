@@ -66,7 +66,9 @@ const createOffer = () => {
   const locationY = getRandomFloatingNumber(139.70000, 139.80000, 5);
 
   return {
-    author: `img/avatars/user0${getRandomIntegerInRange(1, 8)}.png`,
+    author: {
+      avatar:`img/avatars/user0${getRandomIntegerInRange(1, 8)}.png`,
+    },
     offer: {
       title: getRandomArrayElement(TITLES),
       address: `${locationX}, ${locationY}`,

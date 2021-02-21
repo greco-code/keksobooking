@@ -1,6 +1,9 @@
 import {createOfferList} from './data.js';
 import {declOfNum} from './util.js';
 
+const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
+const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
+
 const similarOffers = createOfferList();
 const offerTemplate = document.querySelector('#card')
   .content
@@ -50,27 +53,19 @@ const generatePhotosList = (arr, element) => {
   return photosList;
 }
 
-const declRooms = (number) => {
-  return declOfNum(number, ['комната', 'комнаты', 'комнат']);
-}
-
-const declGuests = (number) => {
-  return declOfNum(number, ['гостя', 'гостей', 'гостей']);
-}
-
 const createCard = ({author, offer}) => {
   const singleOffer = offerTemplate.cloneNode(true);
-  const roomsTotal = offer.rooms;
-  const guestsTotal = offer.guests;
+  const roomsTotal = declOfNum(offer.rooms, ROOM_WORDS);
+  const guestsTotal = declOfNum(offer.guests, GUEST_WORDS);
 
   singleOffer.querySelector('.popup__title').textContent = offer.title;
   singleOffer.querySelector('.popup__text--address').textContent = offer.address;
   singleOffer.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
   singleOffer.querySelector('.popup__type').textContent = translateType(offer.type);
-  singleOffer.querySelector('.popup__text--capacity').textContent = `${roomsTotal}  ${declRooms(roomsTotal)} для ${guestsTotal} ${declGuests(guestsTotal)}.`;
+  singleOffer.querySelector('.popup__text--capacity').textContent = `${offer.rooms}  ${roomsTotal} для ${offer.guests} ${guestsTotal}.`;
   singleOffer.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}  выезд до ${offer.checkout}`;
   singleOffer.querySelector('.popup__description').textContent = offer.description;
-  singleOffer.querySelector('.popup__avatar').src = author;
+  singleOffer.querySelector('.popup__avatar').src = author.avatar;
 
   generateFeaturesList(offer.features, singleOffer);
   generatePhotosList(offer.photos, singleOffer);
