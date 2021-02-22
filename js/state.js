@@ -11,6 +11,12 @@ const disableElements = (arr) => {
   })
 }
 
+const activeElements = (arr) => {
+  arr.forEach((item) => {
+    item.disabled = false;
+  })
+}
+
 const disableForms = () => {
   mainForm.classList.add('ad-form--disabled');
   mapForm.classList.add('map__filters--disabled');
@@ -20,6 +26,18 @@ const disableForms = () => {
   disableElements(mapFormItems);
 }
 
+const activateForm = () => {
+  mainForm.classList.remove('ad-form--disabled');
+  mapForm.classList.remove('map__filters--disabled');
+  mapFeatures.disabled = false;
 
-export {disableForms};
+  activeElements(mainFormItems);
+  activeElements(mapFormItems);
+}
+
+
+export {
+  disableForms,
+  activateForm
+};
 
