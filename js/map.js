@@ -1,6 +1,12 @@
 /* global L:readonly */
 
 import {activateForm} from './state.js';
+import {createOfferList} from './data.js';
+
+const points = createOfferList();
+
+// console.log(createOfferList()[0].offer.title);
+
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -18,12 +24,19 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const mapPinIcon = L.icon(
+const mainMapIcon = L.icon(
   {
-    iconUrl: '../leaflet/images/marker-icon.png',
-    iconRetinaUrl: '../leaflet/images/marker-icon-2x.png',
-    iconSize: [25, 41],
-    iconAnchor: [12.5, 41],
+    iconUrl: '../img/main-pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  },
+)
+
+const secondaryMapIcon = L.icon(
+  {
+    iconUrl: '../img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
   },
 )
 
@@ -34,11 +47,30 @@ const marker = L.marker(
   },
   {
     draggable: true,
-    icon: mapPinIcon,
+    icon: mainMapIcon,
   },
 )
 
 marker.addTo(map);
+
+
+points.forEach((point) => {
+  const lat = point.location.x;
+  const lng = point.location.y;
+
+  const marker = L.marker(
+    {
+      lat,
+      lng,
+    },
+    {
+      icon: secondaryMapIcon,
+    },
+  );
+
+  marker.addTo(map);
+})
+
 
 const getMapCoordinates = () => {
   const {lat, lng} = marker.getLatLng();
