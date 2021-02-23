@@ -1,9 +1,9 @@
 import './data.js';
 import './popup.js';
-import './map.js';
-import './form.js';
+import {disableForms} from './state.js';
 import {validateForm} from './form.js';
-// import {disableForms} from './state.js';
+import {createMap} from './map.js';
 
+disableForms();
+createMap();
 validateForm();
-// disableForms();
