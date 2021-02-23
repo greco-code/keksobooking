@@ -53,7 +53,8 @@ const generatePhotosList = (arr, element) => {
   return photosList;
 }
 
-const createOffer = ({author, offer}) => {
+// Я все таки обратно переименовал, так понятнее выходит. А то у меня есть createOfferList, а она с этой функцией никак не связано. Выходит странновато.
+const createCard = ({author, offer}) => {
   const singleOffer = offerTemplate.cloneNode(true);
   const roomsTotal = declOfNum(offer.rooms, ROOM_WORDS);
   const guestsTotal = declOfNum(offer.guests, GUEST_WORDS);
@@ -73,9 +74,16 @@ const createOffer = ({author, offer}) => {
   return singleOffer;
 }
 
+const showCard = (index) => {
+  const map = document.querySelector('#map-canvas');
+
+  return map.appendChild(createCard(similarOffers[index]));
+}
+
 
 export {
-  createOffer,
-  similarOffers
+  createCard,
+  similarOffers,
+  showCard
 }
 

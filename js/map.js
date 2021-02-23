@@ -1,11 +1,8 @@
 /* global L:readonly */
 
 import {activateForm} from './state.js';
-import {createOfferList} from './data.js';
-
-const points = createOfferList();
-
-// console.log(createOfferList()[0].offer.title);
+// import {createOfferList} from './data.js';
+import {showCard, similarOffers} from './popup.js';
 
 
 const map = L.map('map-canvas')
@@ -54,7 +51,8 @@ const marker = L.marker(
 marker.addTo(map);
 
 
-points.forEach((point) => {
+
+similarOffers.forEach((point, index) => {
   const lat = point.location.x;
   const lng = point.location.y;
 
@@ -68,9 +66,11 @@ points.forEach((point) => {
     },
   );
 
-  marker.addTo(map);
+  marker
+    .addTo(map)
+    // Сами карточки появляются, но еще они появляются за картой, чего быть не должно. Хз, как поправить.
+    .bindPopup(showCard(index));
 })
-
 
 const getMapCoordinates = () => {
   const {lat, lng} = marker.getLatLng();
