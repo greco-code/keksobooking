@@ -9,7 +9,6 @@ const TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const ICON_HEIGHT = 40;
 const ICON_WIDTH = 40;
-const ICON_CENTRE = ICON_WIDTH / 2;
 
 disableForms();
 
@@ -35,7 +34,7 @@ const mainMapIcon = L.icon(
   {
     iconUrl: '../img/main-pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
-    iconAnchor: [ICON_CENTRE, ICON_HEIGHT],
+    iconAnchor: [ICON_WIDTH/2, ICON_HEIGHT],
   },
 )
 
@@ -43,7 +42,7 @@ const mapIcon = L.icon(
   {
     iconUrl: '../img/pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
-    iconAnchor: [ICON_CENTRE, ICON_HEIGHT],
+    iconAnchor: [ICON_WIDTH/2, ICON_HEIGHT],
   },
 )
 
