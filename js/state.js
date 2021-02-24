@@ -2,42 +2,36 @@ const mainForm = document.querySelector('.ad-form');
 const mainFormItems = mainForm.querySelectorAll('.ad-form__element');
 const mapForm = document.querySelector('.map__filters');
 const mapFormItems = mapForm.querySelectorAll('.map__filter')
-const mapFeatures = mapForm.querySelector('.map__features');
+const fieldset = document.querySelector('fieldset');
 
 
-const disableElements = (arr) => {
+const toggleElementState = (arr, state) => {
   arr.forEach((item) => {
-    item.disabled = true;
-  })
-}
-
-const activeElements = (arr) => {
-  arr.forEach((item) => {
-    item.disabled = false;
+    item.disabled = state;
   })
 }
 
 const disableForms = () => {
   mainForm.classList.add('ad-form--disabled');
   mapForm.classList.add('map__filters--disabled');
-  mapFeatures.disabled = true;
+  fieldset.disabled = true;
 
-  disableElements(mainFormItems);
-  disableElements(mapFormItems);
+  toggleElementState(mainFormItems, true);
+  toggleElementState(mapFormItems, true);
 }
 
-const activateForm = () => {
+const activateForms = () => {
   mainForm.classList.remove('ad-form--disabled');
   mapForm.classList.remove('map__filters--disabled');
-  mapFeatures.disabled = false;
+  fieldset.disabled = false;
 
-  activeElements(mainFormItems);
-  activeElements(mapFormItems);
+  toggleElementState(mainFormItems, false);
+  toggleElementState(mapFormItems, false);
 }
 
 
 export {
   disableForms,
-  activateForm
+  activateForms
 };
 

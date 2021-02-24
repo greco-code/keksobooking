@@ -1,5 +1,3 @@
-import {getActualCoordinates} from './map.js';
-
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
 const timeOut = mainForm.querySelector('#timeout');
@@ -33,9 +31,7 @@ const validateForm = () => {
   timeOut.addEventListener('change', onSelectCheckChange);
 }
 
-addressInput.disabled = true;
-// Сами координаты передаются, но в инпут попадает object Object
-addressInput.value = getActualCoordinates();
+addressInput.readOnly = true;
 
 
 export {validateForm};
