@@ -3,6 +3,7 @@ const timeIn = mainForm.querySelector('#timein');
 const timeOut = mainForm.querySelector('#timeout');
 const priceInput = mainForm.querySelector('#price');
 const propertyType = mainForm.querySelector('#type');
+const addressInput = mainForm.querySelector('#address');
 
 const priceToType = {
   bungalow: 0,
@@ -23,13 +24,15 @@ const onSelectTypeChange = () => {
   priceInput.placeholder = priceToType[propertyType.value];
 }
 
-
 const validateForm = () => {
   onSelectTypeChange();
   propertyType.addEventListener('change', onSelectTypeChange);
   timeIn.addEventListener('change', onSelectCheckChange);
   timeOut.addEventListener('change', onSelectCheckChange);
 }
+
+addressInput.readOnly = true;
+
 
 export {validateForm};
 

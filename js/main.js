@@ -1,11 +1,9 @@
-import './data.js';
-import {createOffer, similarOffers} from './popup.js';
+import './popup.js';
+import './form.js';
+// import {disableForms} from './state.js';
 import {validateForm} from './form.js';
+import {renderMap} from './map.js';
 
-
-const map = document.querySelector('#map-canvas');
-
-
-map.appendChild(createOffer(similarOffers[0]));
-
+// disableForms();
+renderMap();
 validateForm();
