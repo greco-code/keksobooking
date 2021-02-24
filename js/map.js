@@ -9,6 +9,7 @@ const TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const ICON_HEIGHT = 40;
 const ICON_WIDTH = 40;
+const addressInput = document.querySelector('#address');
 
 disableForms();
 
@@ -57,7 +58,7 @@ const marker = L.marker(
   },
 ).addTo(map);
 
-const renderMap = () => {
+const renderMarkers = () => {
   similarOffers.forEach((card) => {
     const lat = card.location.x;
     const lng = card.location.y;
@@ -79,16 +80,15 @@ const renderMap = () => {
 }
 
 const fillAddressInput = () => {
-  const addressInput = document.querySelector('#address');
   const {lat, lng} = marker.getLatLng();
   addressInput.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 }
 
-const fillAddressInputOnMove = () => {
+const onMoveFillAddressInput = () => {
   marker.on('move', fillAddressInput);
 }
 
 fillAddressInput();
-fillAddressInputOnMove();
+onMoveFillAddressInput();
 
-export {renderMap};
+export {renderMarkers};
