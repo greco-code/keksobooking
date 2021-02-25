@@ -62,8 +62,8 @@ const photosList = new Array(getRandomIntegerInRange(1, PHOTOS.length))
   .map(() => getRandomArrayElement(PHOTOS));
 
 const createOffer = () => {
-  const locationX = getRandomFloatingNumber(35.65000, 35.70000, 5);
-  const locationY = getRandomFloatingNumber(139.70000, 139.80000, 5);
+  const lat = getRandomFloatingNumber(35.65000, 35.70000, 5);
+  const lng = getRandomFloatingNumber(139.70000, 139.80000, 5);
 
   return {
     author: {
@@ -71,7 +71,7 @@ const createOffer = () => {
     },
     offer: {
       title: getRandomArrayElement(TITLES),
-      address: `${locationX}, ${locationY}`,
+      address: `${lat}, ${lng}`,
       price: getRandomIntegerInRange(0, 1000000),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomIntegerInRange(1, 100),
@@ -83,8 +83,8 @@ const createOffer = () => {
       photos: photosList,
     },
     location: {
-      x: locationX,
-      y: locationY,
+      lat: lat,
+      lng: lng,
     },
   }
 }

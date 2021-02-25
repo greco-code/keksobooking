@@ -1,7 +1,7 @@
 /* global L:readonly */
 
 import {activateForms, disableForms} from './state.js';
-import {createCard, similarOffers} from './popup.js';
+import {createCard} from './popup.js';
 
 const LAT = 35.6895000;
 const LNG = 139.6917100;
@@ -58,10 +58,10 @@ const marker = L.marker(
   },
 ).addTo(map);
 
-const renderMarkers = () => {
-  similarOffers.forEach((card) => {
-    const lat = card.location.x;
-    const lng = card.location.y;
+const renderMarkers = (arr) => {
+  arr.forEach((card) => {
+    const lat = card.location.lat;
+    const lng = card.location.lng;
 
     const marker = L.marker(
       {
