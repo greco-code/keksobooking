@@ -82,17 +82,12 @@ const fillAddressInput = () => {
   addressInput.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 }
 
-const onMoveFillAddressInput = () => {
-  marker.on('move', fillAddressInput);
-}
-
 const resetMarker = () => {
   marker.setLatLng(L.latLng(LAT, LNG));
 }
 
-
 fillAddressInput();
-onMoveFillAddressInput();
+marker.on('move', fillAddressInput);
 
 
 export {renderMarkers, fillAddressInput, resetMarker};
