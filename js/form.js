@@ -10,7 +10,7 @@ const timeOut = mainForm.querySelector('#timeout');
 const priceInput = mainForm.querySelector('#price');
 const propertyType = mainForm.querySelector('#type');
 const addressInput = mainForm.querySelector('#address');
-const resetFormButton = mainForm.querySelector('.ad-form__reset')
+const resetFormButton = mainForm.querySelector('.ad-form__reset');
 
 const priceToType = {
   bungalow: 0,
@@ -62,7 +62,7 @@ mainForm.addEventListener('submit', (evt) => {
 
   const formData = new FormData(evt.target);
 
-  sendData(successHandler, showSendErrorMessage, formData)
+  sendData(successHandler, showSendErrorMessage, formData);
 });
 
 

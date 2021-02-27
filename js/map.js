@@ -22,9 +22,7 @@ const map = L.map('map-canvas')
     lng: LNG,
   }, 10);
 
-// Хз, он тут ругается, что я его не заюзал
-// eslint-disable-next-line no-unused-vars
-const copyright = L.tileLayer(
+L.tileLayer(
   TILE,
   {
     attribution: COPYRIGHT,
