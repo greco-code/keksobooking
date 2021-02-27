@@ -1,4 +1,6 @@
 import {showSendErrorMessage} from './error.js';
+import {showSendSuccessMessage} from './success.js';
+import {sendData} from './server.js';
 
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
@@ -15,7 +17,7 @@ const priceToType = {
 }
 
 const onSelectCheckChange = (evt) => {
-  const { value } = evt.target;
+  const {value} = evt.target;
 
   timeOut.value = value;
   timeIn.value = value;
@@ -35,24 +37,18 @@ const validateForm = () => {
 
 addressInput.readOnly = true;
 
-mainForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const onSubmitSendForm = (onSuccess) => {
+  mainForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-  const formData = new FormData(evt.target);
+    const formData = new FormData(evt.target);
 
-  fetch(
-    'https://22.javascript.pages.academy/keksobooking',
-    {
-      method: 'POST',
-      body: formData,
-    },
-  )
-    .then(r => );
-});
+    sendData(onSuccess, showSendErrorMessage, formData)
+  });
+}
 
-// .catch(() => {
-//   showSendErrorMessage();
-// })
+onSubmitSendForm(showSendSuccessMessage);
 
-export {validateForm};
+
+export {validateForm, onSubmitSendForm};
 

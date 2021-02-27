@@ -1,11 +1,36 @@
-import {renderMarkers} from './map.js';
-import {showGetErrorMessage} from './error.js';
+const getData = (onSuccess, onFail) => {
+  fetch('https://22.javascript.pages.academy/keksobooking/data')
+    .then((r) => r.json())
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch(() => {
+      onFail();
+    })
+}
 
-fetch('https://22.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((data) => {
-    renderMarkers(data);
-  })
-  .catch(() => {
-    showGetErrorMessage();
-  })
+const sendData = (onSuccess, onFail, body) => {
+  fetch(
+    'https://22.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then((r) => {
+      if (r.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    })
+    .catch(() => {
+      onFail();
+    })
+}
+
+
+export {
+  getData,
+  sendData
+}
