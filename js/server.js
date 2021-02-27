@@ -1,7 +1,7 @@
-//todo ссылки в константу
+const SERVER_LINK = 'https://22.javascript.pages.academy/keksobooking'
 
 const getData = (onSuccess, onFail) => {
-  fetch('https://22.javascript.pages.academy/keksobooking/data')
+  fetch(`${SERVER_LINK}/data`)
     .then((r) => r.json())
     .then((data) => {
       onSuccess(data);
@@ -13,7 +13,7 @@ const getData = (onSuccess, onFail) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://22.javascript.pages.academy/keksobooking',
+    SERVER_LINK,
     {
       method: 'POST',
       body,
