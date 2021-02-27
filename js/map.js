@@ -3,8 +3,8 @@
 import {activateForms, disableForms} from './state.js';
 import {createCard} from './popup.js';
 
-const LAT = 35.6895000;
-const LNG = 139.6917100;
+const INITIAL_LAT = 35.6895000;
+const INITIAL_LNG = 139.6917100;
 const TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const ICON_HEIGHT = 40;
@@ -18,8 +18,8 @@ const map = L.map('map-canvas')
     activateForms();
   })
   .setView({
-    lat: LAT,
-    lng: LNG,
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
   }, 10);
 
 L.tileLayer(
@@ -47,8 +47,8 @@ const mapIcon = L.icon(
 
 const marker = L.marker(
   {
-    lat: LAT,
-    lng: LNG,
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
   },
   {
     draggable: true,
@@ -82,12 +82,16 @@ const fillAddressInput = () => {
   addressInput.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 }
 
-const resetMarker = () => {
-  marker.setLatLng(L.latLng(LAT, LNG));
+const resetMap = () => {
+  marker.setLatLng(L.latLng(INITIAL_LAT, INITIAL_LNG));
+  map.setView({
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
+  }, 10);
 }
 
 fillAddressInput();
-marker.on('move', fillAddressInput);
+marker.on('move', () => fillAddressInput);
 
 
-export {renderMarkers, fillAddressInput, resetMarker};
+export {renderMarkers, fillAddressInput, resetMap};

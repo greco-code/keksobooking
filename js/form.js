@@ -2,7 +2,7 @@ import {showSendErrorMessage} from './error.js';
 import {sendData} from './server.js';
 import {fillAddressInput} from './map.js';
 import {showSendSuccessMessage} from './success.js';
-import {resetMarker} from './map.js';
+import {resetMap} from './map.js';
 
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
@@ -48,13 +48,13 @@ const resetForm = () => {
 resetFormButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   resetForm();
-  resetMarker();
+  resetMap();
 })
 
 const successHandler = () => {
   showSendSuccessMessage();
   resetForm();
-  resetMarker();
+  resetMap();
 }
 
 mainForm.addEventListener('submit', (evt) => {

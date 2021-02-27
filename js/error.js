@@ -1,15 +1,12 @@
-const mapContainer = document.querySelector('.map__canvas');
 const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
 
-const documentFragment = document.createDocumentFragment();
 const errorMessage = errorTemplate.cloneNode(true);
 
 const showSendErrorMessage = () => {
-  mapContainer.style.zIndex = 0;
-  documentFragment.appendChild(errorMessage);
-  document.body.appendChild(documentFragment);
+  errorMessage.style.zIndex = 1000;
+  document.body.appendChild(errorMessage);
 }
 
 
