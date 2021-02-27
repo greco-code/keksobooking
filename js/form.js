@@ -1,3 +1,5 @@
+import {showSendErrorMessage} from './error.js';
+
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
 const timeOut = mainForm.querySelector('#timeout');
@@ -33,6 +35,24 @@ const validateForm = () => {
 
 addressInput.readOnly = true;
 
+mainForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  fetch(
+    'https://22.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  )
+    .then(r => );
+});
+
+// .catch(() => {
+//   showSendErrorMessage();
+// })
 
 export {validateForm};
 
