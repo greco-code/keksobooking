@@ -12,7 +12,7 @@ const priceInput = mainForm.querySelector('#price');
 const propertyType = mainForm.querySelector('#type');
 const addressInput = mainForm.querySelector('#address');
 const resetFormButton = mainForm.querySelector('.ad-form__reset')
-const inputTitle = mainForm.querySelector('#title');
+const titleInput = mainForm.querySelector('#title');
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -34,16 +34,15 @@ const onSelectCheckChange = (evt) => {
 }
 
 const onSelectTypeChange = () => {
+  // const currentValue = priceInput.value;
+
   priceInput.min = priceToType[propertyType.value];
   priceInput.placeholder = priceToType[propertyType.value];
+
+  // if (currentValue < priceInput.min)
 }
 
-const validateForm = () => {
-  onSelectTypeChange();
-  propertyType.addEventListener('change', onSelectTypeChange);
-  timeIn.addEventListener('change', onSelectCheckChange);
-  timeOut.addEventListener('change', onSelectCheckChange);
-}
+
 
 addressInput.readOnly = true;
 
@@ -72,37 +71,61 @@ mainForm.addEventListener('submit', (evt) => {
   sendData(successHandler, showSendErrorMessage, formData)
 });
 
-
-//Я так понимаю, эти штуки конфликтуют друг с другом. Какую оставлять?
-inputTitle.addEventListener('invalid', () => {
-  if (inputTitle.validity.tooShort) {
+const onInvalidTitleValidate = () => {
+  if (titleInput.validity.tooShort) {
     //todo получить значения из разметки
-    inputTitle.setCustomValidity(`Минимальная длина ${MIN_TITLE_LENGTH} ${declOfNum(MAX_TITLE_LENGTH, SYMBOL_WORDS)}.`);
-  } else if(inputTitle.validity.tooLong) {
-    inputTitle.setCustomValidity(`Максимальная длина ${MAX_TITLE_LENGTH} ${declOfNum(MIN_TITLE_LENGTH, SYMBOL_WORDS)}.`);
-  } else if (inputTitle.validity.valueMissing) {
-    inputTitle.setCustomValidity('Это обязательное поле!');
+    titleInput.setCustomValidity(`Минимальная длина ${MIN_TITLE_LENGTH} ${declOfNum(MAX_TITLE_LENGTH, SYMBOL_WORDS)}.`);
+  } else if(titleInput.validity.tooLong) {
+    titleInput.setCustomValidity(`Максимальная длина ${MAX_TITLE_LENGTH} ${declOfNum(MIN_TITLE_LENGTH, SYMBOL_WORDS)}.`);
+  } else if (titleInput.validity.valueMissing) {
+    titleInput.setCustomValidity('Это обязательное поле!');
   } else {
-    inputTitle.setCustomValidity('');
+    titleInput.setCustomValidity('');
   }
-});
+}
 
-inputTitle.addEventListener('input', () => {
-  const valueLength = inputTitle.value.length;
+const onInputTitleValidate = () => {
+  const valueLength = titleInput.value.length;
   const LESS_SYMBOLS = MIN_TITLE_LENGTH - valueLength;
   const MORE_SYMBOLS = valueLength - MAX_TITLE_LENGTH;
 
   if (valueLength < MIN_TITLE_LENGTH) {
-    inputTitle.setCustomValidity(`Ещё ${LESS_SYMBOLS} ${declOfNum(LESS_SYMBOLS, SYMBOL_WORDS)}`);
+    titleInput.setCustomValidity(`Ещё ${LESS_SYMBOLS} ${declOfNum(LESS_SYMBOLS, SYMBOL_WORDS)}`);
   } else if(valueLength > MAX_TITLE_LENGTH) {
-    inputTitle.setCustomValidity(`Удалите ${MORE_SYMBOLS} ${declOfNum(MORE_SYMBOLS, SYMBOL_WORDS)}`);
+    titleInput.setCustomValidity(`Удалите ${MORE_SYMBOLS} ${declOfNum(MORE_SYMBOLS, SYMBOL_WORDS)}`);
   } else {
-    inputTitle.setCustomValidity('');
+    titleInput.setCustomValidity('');
   }
 
-  inputTitle.reportValidity();
-})
+  titleInput.reportValidity();
+}
 
+const onInputPriceValidate = () => {
+  const priceInputValue = priceInput.value;
+  const currentValue = parseInt(priceInputValue, 10);
+
+  if (currentValue < priceInput.min) {
+    priceInput.setCustomValidity(`Минимальная цена для этого типа жилья ${priceInput.min} руб/ночь.`);
+  } else if (currentValue > priceInput.max ) {
+    priceInput.setCustomValidity(`Максимальная цена ${priceInput.max} руб/ночь.`);
+  } else if (priceInput.validity.valueMissing) {
+    priceInput.setCustomValidity('Это обязательное поле!');
+  } else {
+    priceInput.setCustomValidity('');
+  }
+
+  priceInput.reportValidity();
+}
+
+const validateForm = () => {
+  onSelectTypeChange();
+  priceInput.addEventListener('input', onInputPriceValidate);
+  titleInput.addEventListener('invalid', onInvalidTitleValidate);
+  titleInput.addEventListener('input', onInputTitleValidate);
+  propertyType.addEventListener('change', onSelectTypeChange);
+  timeIn.addEventListener('change', onSelectCheckChange);
+  timeOut.addEventListener('change', onSelectCheckChange);
+}
 
 export {validateForm};
 
