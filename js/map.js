@@ -35,7 +35,7 @@ const mainMapIcon = L.icon(
   {
     iconUrl: '../img/main-pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
-    iconAnchor: [ICON_WIDTH/2, ICON_HEIGHT],
+    iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
 )
 
@@ -43,7 +43,7 @@ const mapIcon = L.icon(
   {
     iconUrl: '../img/pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
-    iconAnchor: [ICON_WIDTH/2, ICON_HEIGHT],
+    iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
 )
 
@@ -88,7 +88,13 @@ const onMoveFillAddressInput = () => {
   marker.on('move', fillAddressInput);
 }
 
+const resetMarker = () => {
+  marker.setLatLng(L.latLng(LAT, LNG));
+}
+
+
 fillAddressInput();
 onMoveFillAddressInput();
 
-export {renderMarkers};
+
+export {renderMarkers, fillAddressInput, resetMarker};

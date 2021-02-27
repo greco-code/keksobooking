@@ -1,3 +1,5 @@
+//todo ссылки в константу
+
 const getData = (onSuccess, onFail) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((r) => r.json())

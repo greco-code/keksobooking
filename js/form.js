@@ -1,6 +1,8 @@
 import {showSendErrorMessage} from './error.js';
-import {showSendSuccessMessage} from './success.js';
 import {sendData} from './server.js';
+import {fillAddressInput} from './map.js';
+import {showSendSuccessMessage} from './success.js';
+import {resetMarker} from './map.js';
 
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
@@ -8,6 +10,7 @@ const timeOut = mainForm.querySelector('#timeout');
 const priceInput = mainForm.querySelector('#price');
 const propertyType = mainForm.querySelector('#type');
 const addressInput = mainForm.querySelector('#address');
+const resetFormButton = mainForm.querySelector('.ad-form__reset')
 
 const priceToType = {
   bungalow: 0,
@@ -37,18 +40,31 @@ const validateForm = () => {
 
 addressInput.readOnly = true;
 
-const onSubmitSendForm = (onSuccess) => {
-  mainForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const formData = new FormData(evt.target);
-
-    sendData(onSuccess, showSendErrorMessage, formData)
-  });
+const resetForm = () => {
+  // mainForm.reset = true;
+  //todo не работает
+  fillAddressInput();
 }
 
-onSubmitSendForm(showSendSuccessMessage);
+resetFormButton.addEventListener('click', () => {
+  resetForm();
+  resetMarker();
+})
+
+const successHandler = () => {
+  showSendSuccessMessage();
+  resetForm();
+  resetMarker();
+}
+
+mainForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  sendData(successHandler, showSendErrorMessage, formData)
+});
 
 
-export {validateForm, onSubmitSendForm};
+export {validateForm};
 

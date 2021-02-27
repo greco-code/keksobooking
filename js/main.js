@@ -1,11 +1,13 @@
 import './popup.js';
 import './form.js';
 import './success.js';
+import './map.js';
 import {getData} from './server.js';
-import {validateForm} from './form.js';
 import {renderMarkers} from './map.js';
 import {showGetErrorMessage} from './error.js';
-// import {showErrorMessage} from './error.js';
+import {validateForm} from './form.js';
 
-validateForm();
+validateForm()
 getData(renderMarkers, showGetErrorMessage);
+
+
