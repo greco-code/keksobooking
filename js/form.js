@@ -41,12 +41,12 @@ const validateForm = () => {
 addressInput.readOnly = true;
 
 const resetForm = () => {
-  // mainForm.reset = true;
-  //todo не работает
+  mainForm.reset();
   fillAddressInput();
 }
 
-resetFormButton.addEventListener('click', () => {
+resetFormButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   resetForm();
   resetMarker();
 })
