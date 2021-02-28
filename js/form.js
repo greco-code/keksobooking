@@ -1,9 +1,16 @@
+import {showSendErrorMessage} from './error.js';
+import {sendData} from './server.js';
+import {fillAddressInput} from './map.js';
+import {showSendSuccessMessage} from './success.js';
+import {resetMap} from './map.js';
+
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
 const timeOut = mainForm.querySelector('#timeout');
 const priceInput = mainForm.querySelector('#price');
 const propertyType = mainForm.querySelector('#type');
 const addressInput = mainForm.querySelector('#address');
+const resetFormButton = mainForm.querySelector('.ad-form__reset');
 
 const priceToType = {
   bungalow: 0,
@@ -13,7 +20,7 @@ const priceToType = {
 }
 
 const onSelectCheckChange = (evt) => {
-  const { value } = evt.target;
+  const {value} = evt.target;
 
   timeOut.value = value;
   timeIn.value = value;
@@ -32,6 +39,31 @@ const validateForm = () => {
 }
 
 addressInput.readOnly = true;
+
+const resetForm = () => {
+  mainForm.reset();
+  fillAddressInput();
+}
+
+resetFormButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetForm();
+  resetMap();
+})
+
+const successHandler = () => {
+  showSendSuccessMessage();
+  resetForm();
+  resetMap();
+}
+
+mainForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  sendData(successHandler, showSendErrorMessage, formData);
+});
 
 
 export {validateForm};

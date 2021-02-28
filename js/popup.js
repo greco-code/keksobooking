@@ -1,10 +1,8 @@
-import {createOfferList} from './data.js';
 import {declOfNum} from './util.js';
 
 const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
 const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
 
-const similarOffers = createOfferList();
 const offerTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -75,7 +73,6 @@ const createCard = ({author, offer}) => {
 
 
 export {
-  createCard,
-  similarOffers
+  createCard
 }
 

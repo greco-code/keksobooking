@@ -1,10 +1,10 @@
 /* global L:readonly */
 
 import {activateForms, disableForms} from './state.js';
-import {createCard, similarOffers} from './popup.js';
+import {createCard} from './popup.js';
 
-const LAT = 35.6895000;
-const LNG = 139.6917100;
+const INITIAL_LAT = 35.6895000;
+const INITIAL_LNG = 139.6917100;
 const TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const ICON_HEIGHT = 40;
@@ -18,13 +18,11 @@ const map = L.map('map-canvas')
     activateForms();
   })
   .setView({
-    lat: LAT,
-    lng: LNG,
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
   }, 10);
 
-// Хз, он тут ругается, что я его не заюзал
-// eslint-disable-next-line no-unused-vars
-const copyright = L.tileLayer(
+L.tileLayer(
   TILE,
   {
     attribution: COPYRIGHT,
@@ -35,7 +33,7 @@ const mainMapIcon = L.icon(
   {
     iconUrl: '../img/main-pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
-    iconAnchor: [ICON_WIDTH/2, ICON_HEIGHT],
+    iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
 )
 
@@ -43,14 +41,14 @@ const mapIcon = L.icon(
   {
     iconUrl: '../img/pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
-    iconAnchor: [ICON_WIDTH/2, ICON_HEIGHT],
+    iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
 )
 
 const marker = L.marker(
   {
-    lat: LAT,
-    lng: LNG,
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
   },
   {
     draggable: true,
@@ -58,10 +56,10 @@ const marker = L.marker(
   },
 ).addTo(map);
 
-const renderMarkers = () => {
-  similarOffers.forEach((card) => {
-    const lat = card.location.x;
-    const lng = card.location.y;
+const renderMarkers = (arr) => {
+  arr.forEach((card) => {
+    const lat = card.location.lat;
+    const lng = card.location.lng;
 
     const marker = L.marker(
       {
@@ -84,11 +82,16 @@ const fillAddressInput = () => {
   addressInput.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 }
 
-const onMoveFillAddressInput = () => {
-  marker.on('move', fillAddressInput);
+const resetMap = () => {
+  marker.setLatLng(L.latLng(INITIAL_LAT, INITIAL_LNG));
+  map.setView({
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
+  }, 10);
 }
 
 fillAddressInput();
-onMoveFillAddressInput();
+marker.on('move', () => fillAddressInput);
 
-export {renderMarkers};
+
+export {renderMarkers, fillAddressInput, resetMap};
