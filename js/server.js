@@ -1,4 +1,4 @@
-const SERVER_LINK = 'https://22.javascript.pages.academy/keksobooking'
+const SERVER_LINK = 'https://22.javascript.pages.academy/keksobooking';
 
 const getData = (onSuccess, onFail) => {
   fetch(`${SERVER_LINK}/data`)

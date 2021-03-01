@@ -1,21 +1,23 @@
-const mapContainer = document.querySelector('.map__canvas');
+import {closeMessageOnClick, closeMessageOnEsc} from './closeMessage.js';
+
 const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
 
-const documentFragment = document.createDocumentFragment();
 const errorMessage = errorTemplate.cloneNode(true);
+const closeErrorButton = errorMessage.querySelector('.error__button');
 
 const showSendErrorMessage = () => {
-  mapContainer.style.zIndex = 0;
-  documentFragment.appendChild(errorMessage);
-  document.body.appendChild(documentFragment);
+  errorMessage.style.zIndex = 1000;
+  document.body.appendChild(errorMessage);
 }
 
+closeMessageOnEsc(errorMessage);
+closeMessageOnClick(errorMessage, closeErrorButton);
+closeMessageOnClick(errorMessage, errorMessage);
 
-
+const alertContainer = document.createElement('div');
 const showGetErrorMessage = () => {
-  const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';
   alertContainer.style.left = 0;
@@ -31,7 +33,9 @@ const showGetErrorMessage = () => {
   document.body.append(alertContainer);
 }
 
+
 export {
   showSendErrorMessage,
-  showGetErrorMessage
+  showGetErrorMessage,
+  alertContainer
 }

@@ -3,13 +3,14 @@
 import {activateForms, disableForms} from './state.js';
 import {createCard} from './popup.js';
 
-const LAT = 35.6895000;
-const LNG = 139.6917100;
+const INITIAL_LAT = 35.6895000;
+const INITIAL_LNG = 139.6917100;
 const TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const ICON_HEIGHT = 40;
 const ICON_WIDTH = 40;
 const addressInput = document.querySelector('#address');
+const MAP_ZOOM = 10;
 
 disableForms();
 
@@ -18,13 +19,11 @@ const map = L.map('map-canvas')
     activateForms();
   })
   .setView({
-    lat: LAT,
-    lng: LNG,
-  }, 10);
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
+  }, MAP_ZOOM);
 
-// Хз, он тут ругается, что я его не заюзал
-// eslint-disable-next-line no-unused-vars
-const copyright = L.tileLayer(
+L.tileLayer(
   TILE,
   {
     attribution: COPYRIGHT,
@@ -49,8 +48,8 @@ const mapIcon = L.icon(
 
 const marker = L.marker(
   {
-    lat: LAT,
-    lng: LNG,
+    lat: INITIAL_LAT,
+    lng: INITIAL_LNG,
   },
   {
     draggable: true,
@@ -84,17 +83,13 @@ const fillAddressInput = () => {
   addressInput.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`;
 }
 
-const onMoveFillAddressInput = () => {
-  marker.on('move', fillAddressInput);
+const resetMap = () => {
+  marker.setLatLng(L.latLng(INITIAL_LAT, INITIAL_LNG));
+  map.panTo(L.latLng(INITIAL_LAT, INITIAL_LNG));
 }
-
-const resetMarker = () => {
-  marker.setLatLng(L.latLng(LAT, LNG));
-}
-
 
 fillAddressInput();
-onMoveFillAddressInput();
+marker.on('move', () => fillAddressInput);
 
 
-export {renderMarkers, fillAddressInput, resetMarker};
+export {renderMarkers, fillAddressInput, resetMap};

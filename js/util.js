@@ -42,10 +42,16 @@ const declOfNum = (value, words) => {
   return words[2];
 }
 
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+
 export {
   getRandomIntegerInRange,
   getRandomFloatingNumber,
   getRandomArrayElement,
   getNoRepeatElements,
-  declOfNum
+  declOfNum,
+  isEscEvent
 }

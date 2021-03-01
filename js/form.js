@@ -2,7 +2,7 @@ import {showSendErrorMessage} from './error.js';
 import {sendData} from './server.js';
 import {fillAddressInput} from './map.js';
 import {showSendSuccessMessage} from './success.js';
-import {resetMarker} from './map.js';
+import {resetMap} from './map.js';
 import {declOfNum} from './util.js';
 
 const mainForm = document.querySelector('.ad-form');
@@ -54,13 +54,13 @@ const resetForm = () => {
 
 resetFormButton.addEventListener('click', () => {
   resetForm();
-  resetMarker();
+  resetMap();
 })
 
 const successHandler = () => {
   showSendSuccessMessage();
   resetForm();
-  resetMarker();
+  resetMap();
 }
 
 mainForm.addEventListener('submit', (evt) => {
@@ -73,7 +73,6 @@ mainForm.addEventListener('submit', (evt) => {
 
 const onInvalidTitleValidate = () => {
   if (titleInput.validity.tooShort) {
-    //todo получить значения из разметки
     titleInput.setCustomValidity(`Минимальная длина ${MIN_TITLE_LENGTH} ${declOfNum(MAX_TITLE_LENGTH, SYMBOL_WORDS)}.`);
   } else if(titleInput.validity.tooLong) {
     titleInput.setCustomValidity(`Максимальная длина ${MAX_TITLE_LENGTH} ${declOfNum(MIN_TITLE_LENGTH, SYMBOL_WORDS)}.`);
