@@ -1,20 +1,30 @@
-import {closeMessageOnClick, closeMessageOnEsc} from './closeMessage.js';
+import {isEscEvent} from './util.js';
 
 const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
 
 const errorMessage = errorTemplate.cloneNode(true);
-const closeErrorButton = errorMessage.querySelector('.error__button');
 
 const showSendErrorMessage = () => {
   errorMessage.style.zIndex = 1000;
   document.body.appendChild(errorMessage);
-}
 
-closeMessageOnEsc(errorMessage);
-closeMessageOnClick(errorMessage, closeErrorButton);
-closeMessageOnClick(errorMessage, errorMessage);
+  const onEscMessageClose = (evt) => {
+    evt.preventDefault();
+    if (isEscEvent(evt)) {
+      errorMessage.remove();
+      document.removeEventListener('keydown', onEscMessageClose);
+    }
+  }
+
+  errorMessage.addEventListener('click', () => {
+    errorMessage.remove();
+    document.removeEventListener('keydown', onEscMessageClose);
+  })
+
+  document.addEventListener('keydown', onEscMessageClose)
+}
 
 const alertContainer = document.createElement('div');
 const showGetErrorMessage = () => {
