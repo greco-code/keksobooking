@@ -34,25 +34,20 @@ const onSelectCheckChange = (evt) => {
 }
 
 const onSelectTypeChange = () => {
-  // const currentValue = priceInput.value;
-
   priceInput.min = priceToType[propertyType.value];
   priceInput.placeholder = priceToType[propertyType.value];
-
-  // if (currentValue < priceInput.min)
 }
-
-
 
 addressInput.readOnly = true;
 
 const resetForm = () => {
-  mainForm.reset = true;
-  //todo не работает
+  mainForm.reset();
+  onSelectTypeChange();
   fillAddressInput();
 }
 
-resetFormButton.addEventListener('click', () => {
+resetFormButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
   resetForm();
   resetMap();
 })
@@ -71,7 +66,7 @@ mainForm.addEventListener('submit', (evt) => {
   sendData(successHandler, showSendErrorMessage, formData)
 });
 
-const onInvalidTitleValidate = () => {
+const onChangeTitleValidate = () => {
   if (titleInput.validity.tooShort) {
     titleInput.setCustomValidity(`Минимальная длина ${MIN_TITLE_LENGTH} ${declOfNum(MAX_TITLE_LENGTH, SYMBOL_WORDS)}.`);
   } else if(titleInput.validity.tooLong) {
@@ -81,25 +76,11 @@ const onInvalidTitleValidate = () => {
   } else {
     titleInput.setCustomValidity('');
   }
-}
-
-const onInputTitleValidate = () => {
-  const valueLength = titleInput.value.length;
-  const LESS_SYMBOLS = MIN_TITLE_LENGTH - valueLength;
-  const MORE_SYMBOLS = valueLength - MAX_TITLE_LENGTH;
-
-  if (valueLength < MIN_TITLE_LENGTH) {
-    titleInput.setCustomValidity(`Ещё ${LESS_SYMBOLS} ${declOfNum(LESS_SYMBOLS, SYMBOL_WORDS)}`);
-  } else if(valueLength > MAX_TITLE_LENGTH) {
-    titleInput.setCustomValidity(`Удалите ${MORE_SYMBOLS} ${declOfNum(MORE_SYMBOLS, SYMBOL_WORDS)}`);
-  } else {
-    titleInput.setCustomValidity('');
-  }
 
   titleInput.reportValidity();
 }
 
-const onInputPriceValidate = () => {
+const onChangePriceValidate = () => {
   const priceInputValue = priceInput.value;
   const currentValue = parseInt(priceInputValue, 10);
 
@@ -112,15 +93,12 @@ const onInputPriceValidate = () => {
   } else {
     priceInput.setCustomValidity('');
   }
-
-  priceInput.reportValidity();
 }
 
 const validateForm = () => {
   onSelectTypeChange();
-  priceInput.addEventListener('input', onInputPriceValidate);
-  titleInput.addEventListener('invalid', onInvalidTitleValidate);
-  titleInput.addEventListener('input', onInputTitleValidate);
+  priceInput.addEventListener('change', onChangePriceValidate);
+  titleInput.addEventListener('change', onChangeTitleValidate);
   propertyType.addEventListener('change', onSelectTypeChange);
   timeIn.addEventListener('change', onSelectCheckChange);
   timeOut.addEventListener('change', onSelectCheckChange);
