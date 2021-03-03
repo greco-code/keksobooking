@@ -10,6 +10,7 @@ const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">Open
 const ICON_HEIGHT = 40;
 const ICON_WIDTH = 40;
 const addressInput = document.querySelector('#address');
+const MAP_ZOOM = 10;
 
 disableForms();
 
@@ -20,7 +21,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: INITIAL_LAT,
     lng: INITIAL_LNG,
-  }, 10);
+  }, MAP_ZOOM);
 
 L.tileLayer(
   TILE,
@@ -84,10 +85,7 @@ const fillAddressInput = () => {
 
 const resetMap = () => {
   marker.setLatLng(L.latLng(INITIAL_LAT, INITIAL_LNG));
-  map.setView({
-    lat: INITIAL_LAT,
-    lng: INITIAL_LNG,
-  }, 10);
+  map.panTo(L.latLng(INITIAL_LAT, INITIAL_LNG));
 }
 
 fillAddressInput();
