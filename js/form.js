@@ -13,10 +13,9 @@ const propertyType = mainForm.querySelector('#type');
 const addressInput = mainForm.querySelector('#address');
 const resetFormButton = mainForm.querySelector('.ad-form__reset')
 const titleInput = mainForm.querySelector('#title');
-const roomQuantity = mainForm.querySelector('#room_number');
-// const roomQuantityOptions = roomQuantity.querySelectorAll('option');
-const guestsAmount = mainForm.querySelector('#capacity');
-const guestsAmountOptions = guestsAmount.querySelectorAll('option');
+const roomSelect = mainForm.querySelector('#room_number');
+const guestSelect = mainForm.querySelector('#capacity');
+const guestSelectOptions = guestSelect.querySelectorAll('option');
 
 
 const MIN_TITLE_LENGTH = 30;
@@ -31,12 +30,24 @@ const priceToType = {
   palace: 10000,
 }
 
-// const guestsToRooms = {
-//   1: [1],
-//   2: [1, 2],
-//   3: [1, 2, 3],
-//   100: [0],
-// }
+const roomsCapacity = {
+  1: {
+    value: [1],
+    error: 'Только один гость',
+  },
+  2: {
+    value: [1, 2],
+    error: 'Не более 2 гостей и не менее 1',
+  },
+  3: {
+    value: [1, 2, 3],
+    error: 'Не более 3 гостей и не менее 1',
+  },
+  100: {
+    value: [0],
+    error: 'Не для гостей!',
+  },
+}
 
 
 const onSelectCheckChange = (evt) => {
@@ -107,48 +118,37 @@ const onChangePriceValidate = () => {
     priceInput.setCustomValidity('');
   }
 }
-// Ну это отстой какой то :-)
-const onChangeGuestsValidate = (evt) => {
-  guestsAmountOptions.forEach((option) => {
-    option.disabled = true;
+
+const onChangeRoomsValidate = () => {
+  const currentGuests = guestSelect.value;
+  const currentRoom = roomSelect.value;
+
+  if (!roomsCapacity[currentRoom].value.includes(currentGuests)) {
+    guestSelect.setCustomValidity(roomsCapacity[currentRoom].error);
+  } else {
+    guestSelect.setCustomValidity('');
+  }
+
+  if (roomSelect.value === '100' && guestSelect.value > '0') {
+    guestSelect.setCustomValidity(roomsCapacity[currentRoom].error);
+  } else {
+    guestSelect.setCustomValidity('');
+  }
+}
+
+const changeSelectedOption = () => {
+  guestSelectOptions.forEach((option) => {
+    if (option.value === '1') {
+      option.selected = true;
+    }
   })
-
-  if (evt.target.value === '1') {
-    guestsAmountOptions.forEach((option) => {
-      if (option.value === '1') {
-        option.disabled = false;
-      }
-    });
-  }
-
-  if (evt.target.value === '2') {
-    guestsAmountOptions.forEach((option) => {
-      if (option.value === '1' || option.value === '2') {
-        option.disabled = false;
-      }
-    });
-  }
-
-  if (evt.target.value === '3') {
-    guestsAmountOptions.forEach((option) => {
-      if (option.value === '1' || option.value === '2' || option.value === '3') {
-        option.disabled = false;
-      }
-    });
-  }
-
-  if (evt.target.value === '100') {
-    guestsAmountOptions.forEach((option) => {
-      if (option.value === '0') {
-        option.disabled = false;
-      }
-    });
-  }
 }
 
 const validateForm = () => {
   onSelectTypeChange();
-  roomQuantity.addEventListener('change', onChangeGuestsValidate);
+  changeSelectedOption();
+  guestSelect.addEventListener('change', onChangeRoomsValidate);
+  roomSelect.addEventListener('change', onChangeRoomsValidate);
   priceInput.addEventListener('change', onChangePriceValidate);
   titleInput.addEventListener('change', onChangeTitleValidate);
   propertyType.addEventListener('change', onSelectTypeChange);
