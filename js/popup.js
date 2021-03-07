@@ -1,7 +1,16 @@
 import {declOfNum} from './util.js';
+import {cleanMarkers, renderMarkers} from './map.js';
+import {saveToStore} from './store.js';
+import {markers, map} from './map.js';
 
 const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
 const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
+const filterForm = document.querySelector('.map__filters');
+const filterType = filterForm.querySelector('#housing-type');
+// const filterPrice = filterForm.querySelector('#housing-price');
+// const filterRooms = filterForm.querySelector('#housing-rooms');
+// const filterGuests = filterForm.querySelector('#housing-guests');
+// const filterFeatures = filterForm.querySelector('#housing-features');
 
 const offerTemplate = document.querySelector('#card')
   .content
@@ -51,6 +60,8 @@ const generatePhotosList = (arr, element) => {
   return photosList;
 }
 
+const filterCards = (card) => card.offer.type === filterType.value || filterType.value === 'any';
+
 const createCard = ({author, offer}) => {
   const singleOffer = offerTemplate.cloneNode(true);
   const roomsTotal = declOfNum(offer.rooms, ROOM_WORDS);
@@ -70,9 +81,23 @@ const createCard = ({author, offer}) => {
 
   return singleOffer;
 }
+// Я тут две переменные экспортировал, это, вроде, нехорошо
+const onDataSuccess = (data) => {
+  saveToStore(data);
+  renderMarkers(data);
+  filterForm.addEventListener('change', (data) => {
+    markers.clearLayers();
+    cleanMarkers();
+    map.closePopup();
+    // todo не работает
+    renderMarkers(data);
+  });
+}
 
 
 export {
-  createCard
+  createCard,
+  filterCards,
+  onDataSuccess
 }
 

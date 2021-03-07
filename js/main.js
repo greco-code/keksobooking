@@ -3,12 +3,11 @@ import './form.js';
 import './success.js';
 import './map.js';
 import {getData} from './server.js';
-import {renderMarkers} from './map.js';
+import {cleanMarkers} from './map.js';
 import {showGetErrorMessage} from './error.js';
 import {validateForm} from './form.js';
 import {disableForms} from './state.js';
-
-const CARDS_COUNT = 10;
+import {onDataSuccess} from './popup.js';
 
 validateForm();
 
@@ -17,8 +16,16 @@ const showOnFail = () => {
   disableForms();
 }
 
-getData((data) => {
-  renderMarkers(data.slice(0, CARDS_COUNT))
-}, showOnFail);
+// getData((data) => {
+//   renderMarkers(data)
+// }, showOnFail);
+
+
+getData(
+  onDataSuccess,
+  showOnFail,
+);
+
+cleanMarkers();
 
 
