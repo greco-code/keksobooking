@@ -10,10 +10,7 @@ const NOT_SELECTED = 'any'
 const CARDS_COUNT = 10;
 
 
-const filterByType = (card) => {
-  return card.offer.type === filterType.value || filterType.value === NOT_SELECTED;
-}
-
+const filterByType = (card) => card.offer.type === filterType.value || filterType.value === NOT_SELECTED;
 
 const filterMarkers = (cards) => {
   return cards
