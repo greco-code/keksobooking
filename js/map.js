@@ -74,10 +74,9 @@ const renderMarkers = (arr) => {
     );
 
     markers.addLayer(marker);
-
-    marker
-      .bindPopup(createCard(card));
+    marker.bindPopup(createCard(card));
   })
+
   markers.addTo(map);
 }
 
@@ -87,7 +86,6 @@ const fillAddressInput = () => {
 }
 
 const resetMap = () => {
-
   map.panTo(L.latLng(INITIAL_LAT, INITIAL_LNG));
 }
 
