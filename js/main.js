@@ -6,8 +6,21 @@ import {getData} from './server.js';
 import {renderMarkers} from './map.js';
 import {showGetErrorMessage} from './error.js';
 import {validateForm} from './form.js';
+import {disableForms} from './state.js';
+import {setFilterListener} from './filter.js';
 
-validateForm()
-getData(renderMarkers, showGetErrorMessage);
 
+const onDataSuccess = (data) => {
+  renderMarkers(data);
+  setFilterListener(data);
+}
+
+const onDataFail = () => {
+  showGetErrorMessage();
+  disableForms();
+}
+
+
+validateForm();
+getData(onDataSuccess, onDataFail);
 

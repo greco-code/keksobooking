@@ -71,8 +71,5 @@ const createCard = ({author, offer}) => {
   return singleOffer;
 }
 
-
-export {
-  createCard
-}
+export {createCard}
 

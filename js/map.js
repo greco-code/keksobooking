@@ -56,6 +56,7 @@ const marker = L.marker(
     icon: mainMapIcon,
   },
 ).addTo(map);
+const markers = L.layerGroup();
 
 const renderMarkers = (arr) => {
   arr.forEach((card) => {
@@ -72,10 +73,12 @@ const renderMarkers = (arr) => {
       },
     );
 
+    markers.addLayer(marker);
+
     marker
-      .addTo(map)
       .bindPopup(createCard(card));
   })
+  markers.addTo(map);
 }
 
 const fillAddressInput = () => {
@@ -84,12 +87,17 @@ const fillAddressInput = () => {
 }
 
 const resetMap = () => {
-  marker.setLatLng(L.latLng(INITIAL_LAT, INITIAL_LNG));
+
   map.panTo(L.latLng(INITIAL_LAT, INITIAL_LNG));
 }
 
 fillAddressInput();
 marker.on('move', () => fillAddressInput);
 
+const cleanMarkers = () => {
+  map.closePopup();
+  markers.clearLayers();
+}
 
-export {renderMarkers, fillAddressInput, resetMap};
+
+export {renderMarkers, fillAddressInput, resetMap, cleanMarkers};
