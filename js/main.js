@@ -3,29 +3,24 @@ import './form.js';
 import './success.js';
 import './map.js';
 import {getData} from './server.js';
-import {cleanMarkers} from './map.js';
+import {renderMarkers} from './map.js';
 import {showGetErrorMessage} from './error.js';
 import {validateForm} from './form.js';
 import {disableForms} from './state.js';
-import {onDataSuccess} from './popup.js';
+import {setFilterListener} from './filter.js';
 
-validateForm();
 
-const showOnFail = () => {
+const onDataSuccess = (data) => {
+  renderMarkers(data);
+  setFilterListener(data);
+}
+
+const onDataFail = () => {
   showGetErrorMessage();
   disableForms();
 }
 
-// getData((data) => {
-//   renderMarkers(data)
-// }, showOnFail);
 
-
-getData(
-  onDataSuccess,
-  showOnFail,
-);
-
-cleanMarkers();
-
+validateForm();
+getData(onDataSuccess, onDataFail);
 

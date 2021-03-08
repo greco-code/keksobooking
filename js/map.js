@@ -1,7 +1,7 @@
 /* global L:readonly */
 
 import {activateForms, disableForms} from './state.js';
-import {createCard, filterCards} from './popup.js';
+import {createCard} from './popup.js';
 
 const INITIAL_LAT = 35.6895000;
 const INITIAL_LNG = 139.6917100;
@@ -11,7 +11,6 @@ const ICON_HEIGHT = 40;
 const ICON_WIDTH = 40;
 const addressInput = document.querySelector('#address');
 const MAP_ZOOM = 10;
-const CARDS_COUNT = 10;
 
 disableForms();
 
@@ -60,29 +59,25 @@ const marker = L.marker(
 const markers = L.layerGroup();
 
 const renderMarkers = (arr) => {
-  arr
-    .slice()
-    .filter(filterCards)
-    .slice(0, CARDS_COUNT)
-    .forEach((card) => {
-      const lat = card.location.lat;
-      const lng = card.location.lng;
+  arr.forEach((card) => {
+    const lat = card.location.lat;
+    const lng = card.location.lng;
 
-      const marker = L.marker(
-        {
-          lat,
-          lng,
-        },
-        {
-          icon: mapIcon,
-        },
-      );
+    const marker = L.marker(
+      {
+        lat,
+        lng,
+      },
+      {
+        icon: mapIcon,
+      },
+    );
 
-      markers.addLayer(marker);
+    markers.addLayer(marker);
 
-      marker
-        .bindPopup(createCard(card));
-    })
+    marker
+      .bindPopup(createCard(card));
+  })
   markers.addTo(map);
 }
 
@@ -92,7 +87,7 @@ const fillAddressInput = () => {
 }
 
 const resetMap = () => {
-  marker.setLatLng(L.latLng(INITIAL_LAT, INITIAL_LNG));
+
   map.panTo(L.latLng(INITIAL_LAT, INITIAL_LNG));
 }
 
@@ -100,8 +95,9 @@ fillAddressInput();
 marker.on('move', () => fillAddressInput);
 
 const cleanMarkers = () => {
+  map.closePopup();
   markers.clearLayers();
 }
 
 
-export {renderMarkers, fillAddressInput, resetMap, cleanMarkers, markers, map};
+export {renderMarkers, fillAddressInput, resetMap, cleanMarkers};
