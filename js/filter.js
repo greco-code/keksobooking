@@ -5,7 +5,7 @@ const filterType = filterForm.querySelector('#housing-type');
 const filterPrice = filterForm.querySelector('#housing-price');
 const filterRooms = filterForm.querySelector('#housing-rooms');
 const filterGuests = filterForm.querySelector('#housing-guests');
-// const filterFeatures = filterForm.querySelector('#housing-features');
+const filterFeatures = filterForm.querySelector('#housing-features');
 const CARDS_COUNT = 10;
 const NOT_SELECTED = 'any'
 const HIGH_PRICE_VALUE = 'high'
@@ -26,7 +26,7 @@ const filterByPrice = (card) => {
     case HIGH_PRICE_VALUE:
       return card.offer.price > PRICE_TRANSLATE['high'];
     case MIDDLE_PRICE_VALUE:
-      return card.offer.price >=PRICE_TRANSLATE['low'] && card.offer.price <= PRICE_TRANSLATE['high'];
+      return card.offer.price >= PRICE_TRANSLATE['low'] && card.offer.price <= PRICE_TRANSLATE['high'];
     case LOW_PRICE_VALUE:
       return card.offer.price < LOW_PRICE_VALUE;
     default:
@@ -34,10 +34,20 @@ const filterByPrice = (card) => {
   }
 }
 
+const filterByFeatures = (card) => {
+  const checkedFeatures = filterFeatures.querySelectorAll('input:checked');
+
+  if (checkedFeatures.length === 0) {
+    return true;
+  }
+
+  checkedFeatures.forEach((feature) => card.offer.features.includes(feature.value));
+}
+
 
 const filterMarkers = (cards) => {
   return cards
-    .filter(card => filterByType(card) && filterByRooms(card) && filterByGuests(card) && filterByPrice(card))
+    .filter(card => filterByType(card) && filterByRooms(card) && filterByGuests(card) && filterByPrice(card) && filterByFeatures(card))
     .slice(0, CARDS_COUNT);
 }
 
