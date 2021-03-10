@@ -41,9 +41,14 @@ const filterByFeatures = (card) => {
     return true;
   }
 
-  checkedFeatures.forEach((feature) => card.offer.features.includes(feature.value));
-}
+  for (let feature of checkedFeatures) {
+    if(!card.offer.features.includes(feature.value)) {
+      return false;
+    }
+  }
 
+  return true;
+}
 
 const filterMarkers = (cards) => {
   return cards
