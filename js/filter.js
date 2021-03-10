@@ -1,4 +1,5 @@
 import {cleanMarkers, renderMarkers} from './map.js';
+import {debounce} from './util.js';
 
 const filterForm = document.querySelector('.map__filters');
 const filterType = filterForm.querySelector('#housing-type');
@@ -11,6 +12,8 @@ const NOT_SELECTED = 'any'
 const HIGH_PRICE_VALUE = 'high'
 const LOW_PRICE_VALUE = 'low'
 const MIDDLE_PRICE_VALUE = 'middle'
+const RENDER_DELAY = 500;
+const IMMEDIATE_RENDER = true;
 
 const PRICE_TRANSLATE = {
   low: 10000,
@@ -56,11 +59,11 @@ const filterMarkers = (cards) => {
     .slice(0, CARDS_COUNT);
 }
 
-const updateMarkers = (data) => {
+const updateMarkers = debounce((data) => {
   const filteredData = filterMarkers(data);
   cleanMarkers();
   renderMarkers(filteredData);
-}
+}, RENDER_DELAY, IMMEDIATE_RENDER)
 
 const setFilterListener = (data) => {
   filterForm.addEventListener('change', () => {
