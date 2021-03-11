@@ -13,6 +13,7 @@ const LOW_PRICE_VALUE = 'low'
 const MIDDLE_PRICE_VALUE = 'middle'
 const RENDER_DELAY = 500;
 const IMMEDIATE_RENDER = true;
+const CARDS_COUNT = 10;
 
 const PRICE_TRANSLATE = {
   low: 10000,
@@ -61,7 +62,7 @@ const filterMarkers = (cards) => {
       filterByGuests(card) &&
       filterByPrice(card) &&
       filterByFeatures(card) &&
-      filteredCards.length <= 10) {
+      filteredCards.length <= CARDS_COUNT) {
       filteredCards.push(card);
     }
   }

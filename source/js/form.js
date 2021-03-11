@@ -23,10 +23,10 @@ const avatarPreview = document.querySelector('.ad-form-header__preview-img')
 const images = document.querySelector('#images');
 const imagesPreview = document.querySelector('.ad-form__photo-preview');
 
-
-
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const ROOM_SELECT_100 = '100';
+const ROOM_SELECT_0 = '0';
 
 const SYMBOL_WORDS = ['символ', 'символа', 'символов']
 
@@ -136,7 +136,7 @@ const onChangeRoomsValidate = () => {
     guestSelect.setCustomValidity('');
   }
 
-  if (roomSelect.value === '100' && guestSelect.value > '0') {
+  if (roomSelect.value === ROOM_SELECT_100 && guestSelect.value > ROOM_SELECT_0) {
     guestSelect.setCustomValidity(roomsCapacity[currentRoom].error);
   } else {
     guestSelect.setCustomValidity('');
