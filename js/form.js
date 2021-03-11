@@ -4,6 +4,7 @@ import {fillAddressInput} from './map.js';
 import {showSendSuccessMessage} from './success.js';
 import {resetMap} from './map.js';
 import {declOfNum} from './util.js';
+import {picUploadFunction} from './picutureUpload.js';
 
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
@@ -16,6 +17,12 @@ const titleInput = mainForm.querySelector('#title');
 const roomSelect = mainForm.querySelector('#room_number');
 const guestSelect = mainForm.querySelector('#capacity');
 const guestSelectOptions = guestSelect.querySelectorAll('option');
+
+const avatar  = document.querySelector('#avatar');
+const avatarPreview = document.querySelector('.ad-form-header__preview-img')
+const images = document.querySelector('#images');
+const imagesPreview = document.querySelector('.ad-form__photo-preview');
+
 
 
 const MIN_TITLE_LENGTH = 30;
@@ -155,6 +162,9 @@ const validateForm = () => {
   timeIn.addEventListener('change', onSelectCheckChange);
   timeOut.addEventListener('change', onSelectCheckChange);
 }
+
+picUploadFunction(avatar, avatarPreview);
+picUploadFunction(images, imagesPreview);
 
 export {validateForm};
 
