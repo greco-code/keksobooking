@@ -21,4 +21,8 @@ const picUploadFunction = (input, preview) => {
   })
 }
 
-export {picUploadFunction}
+const resetPreview = (preview, imageSRC) => {
+  preview.src = imageSRC;
+}
+
+export {picUploadFunction, resetPreview}

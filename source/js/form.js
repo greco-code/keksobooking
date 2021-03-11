@@ -5,6 +5,7 @@ import {showSendSuccessMessage} from './success.js';
 import {resetMap} from './map.js';
 import {declOfNum} from './util.js';
 import {picUploadFunction} from './picutureUpload.js';
+import {resetPreview} from './picuture-upload.js';
 
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
@@ -22,6 +23,7 @@ const avatar  = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('.ad-form-header__preview-img')
 const images = document.querySelector('#images');
 const imagesPreview = document.querySelector('.ad-form__photo-preview');
+const DEFAULT_IMAGE_SRC = 'img/muffin-grey.svg';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -75,6 +77,8 @@ const resetForm = () => {
   mainForm.reset();
   onSelectTypeChange();
   fillAddressInput();
+  resetPreview(avatarPreview, DEFAULT_IMAGE_SRC);
+  resetPreview(imagesPreview, DEFAULT_IMAGE_SRC);
 }
 
 resetFormButton.addEventListener('click', (evt) => {
