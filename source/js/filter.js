@@ -44,7 +44,7 @@ const filterByFeatures = (card) => {
     return true;
   }
 
-  for (let feature of checkedFeatures) {
+  for (const feature of checkedFeatures) {
     if (!card.offer.features.includes(feature.value)) {
       return false;
     }
@@ -54,9 +54,9 @@ const filterByFeatures = (card) => {
 }
 
 const filterMarkers = (cards) => {
-  let filteredCards = [];
+  const filteredCards = [];
 
-  for (let card of cards) {
+  for (const card of cards) {
     if (filterByType(card) &&
       filterByRooms(card) &&
       filterByGuests(card) &&
