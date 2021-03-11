@@ -7,7 +7,6 @@ const filterPrice = filterForm.querySelector('#housing-price');
 const filterRooms = filterForm.querySelector('#housing-rooms');
 const filterGuests = filterForm.querySelector('#housing-guests');
 const filterFeatures = filterForm.querySelector('#housing-features');
-const CARDS_COUNT = 10;
 const NOT_SELECTED = 'any'
 const HIGH_PRICE_VALUE = 'high'
 const LOW_PRICE_VALUE = 'low'
@@ -45,7 +44,7 @@ const filterByFeatures = (card) => {
   }
 
   for (let feature of checkedFeatures) {
-    if(!card.offer.features.includes(feature.value)) {
+    if (!card.offer.features.includes(feature.value)) {
       return false;
     }
   }
@@ -54,9 +53,20 @@ const filterByFeatures = (card) => {
 }
 
 const filterMarkers = (cards) => {
-  return cards
-    .filter(card => filterByType(card) && filterByRooms(card) && filterByGuests(card) && filterByPrice(card) && filterByFeatures(card))
-    .slice(0, CARDS_COUNT);
+  let filteredCards = [];
+
+  for (let card of cards) {
+    if (filterByType(card) &&
+      filterByRooms(card) &&
+      filterByGuests(card) &&
+      filterByPrice(card) &&
+      filterByFeatures(card) &&
+      filteredCards.length <= 10) {
+      filteredCards.push(card);
+    }
+  }
+
+  return filteredCards;
 }
 
 const updateMarkers = debounce((data) => {
