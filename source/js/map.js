@@ -32,7 +32,7 @@ L.tileLayer(
 
 const mainMapIcon = L.icon(
   {
-    iconUrl: '../img/main-pin.svg',
+    iconUrl: 'img/main-pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
     iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
@@ -40,7 +40,7 @@ const mainMapIcon = L.icon(
 
 const mapIcon = L.icon(
   {
-    iconUrl: '../img/pin.svg',
+    iconUrl: 'img/pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
     iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
