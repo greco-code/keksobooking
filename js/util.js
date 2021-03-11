@@ -46,7 +46,7 @@ const isEscEvent = (evt) => {
   return evt.key === ('Escape' || 'Esc');
 };
 
-function debounce(func, wait, immediate) {
+const debounce = (func, wait, immediate) => {
   let timeout;
 
   return function executedFunction() {
