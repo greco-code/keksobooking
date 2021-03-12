@@ -1,5 +1,4 @@
-/* global L:readonly */
-
+import L from 'leaflet';
 import {activateForms, disableForms} from './state.js';
 import {createCard} from './popup.js';
 

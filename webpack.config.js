@@ -13,29 +13,29 @@ module.exports = {
   //     filename: 'style.css'
   //   })
   // ],
-  // // devServer: {
-  // //   contentBase: path.join(__dirname, 'build'),
-  // //   compress: true,
-  // //   open: true,
-  // //   port: 8080,
-  // // },
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.css$/i,
-  //       use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader'],
-  //     },
-  //     {
-  //       test: /\.(png|jpg|gif)$/i,
-  //       use: [
-  //         {
-  //           loader: 'url-loader',
-  //           options: {
-  //             limit: 8192,
-  //           },
-  //         },
-  //       ],
-  //     },
-  //   ],
+  // devServer: {
+  //   contentBase: path.join(__dirname, 'build'),
+  //   compress: true,
+  //   open: true,
+  //   port: 8080,
   // },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
