@@ -4,7 +4,7 @@ import {fillAddressInput} from './map.js';
 import {showSendSuccessMessage} from './success.js';
 import {resetMap} from './map.js';
 import {declOfNum} from './util.js';
-import {picUploadFunction} from './picutureUpload.js';
+import {picUploadFunction} from './picuture-upload.js';
 import {resetPreview} from './picuture-upload.js';
 
 const mainForm = document.querySelector('.ad-form');
