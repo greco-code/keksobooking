@@ -51,6 +51,18 @@ const generatePhotosList = (arr, element) => {
   return photosList;
 }
 
+const removeEmptyBlock = (card) => {
+  const children = card.children;
+
+  for (let child of children) {
+    if (!child.hasChildNodes() && child.tagName !== 'IMG') {
+      child.remove();
+    }
+  }
+
+  return card;
+}
+
 const createCard = ({author, offer}) => {
   const singleOffer = offerTemplate.cloneNode(true);
   const roomsTotal = declOfNum(offer.rooms, ROOM_WORDS);
@@ -68,7 +80,7 @@ const createCard = ({author, offer}) => {
   generateFeaturesList(offer.features, singleOffer);
   generatePhotosList(offer.photos, singleOffer);
 
-  return singleOffer;
+  return removeEmptyBlock(singleOffer);
 }
 
 export {createCard}
