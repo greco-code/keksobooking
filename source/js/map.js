@@ -2,6 +2,8 @@ import L from 'leaflet';
 import {activateForms, disableForms} from './state.js';
 import {createCard} from './popup.js';
 
+import 'leaflet/dist/leaflet.css';
+
 const INITIAL_LAT = 35.6895000;
 const INITIAL_LNG = 139.6917100;
 const TILE = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
