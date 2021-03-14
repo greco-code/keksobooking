@@ -1,6 +1,6 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png', 'svg'];
 
-const picUploadFunction = (input, preview) => {
+const uploadPicture = (input, preview) => {
   input.addEventListener('change', () => {
     const file = input.files[0];
     const fileName = file.name.toLowerCase();
@@ -25,4 +25,4 @@ const resetPreview = (preview, imageSRC) => {
   preview.src = imageSRC;
 }
 
-export {picUploadFunction, resetPreview}
+export {uploadPicture, resetPreview}

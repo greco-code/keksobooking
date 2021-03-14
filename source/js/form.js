@@ -4,7 +4,7 @@ import {fillAddressInput} from './map.js';
 import {showSendSuccessMessage} from './success.js';
 import {resetMap} from './map.js';
 import {declOfNum} from './util.js';
-import {picUploadFunction} from './picuture-upload.js';
+import {uploadPicture} from './picuture-upload.js';
 import {resetPreview} from './picuture-upload.js';
 
 const mainForm = document.querySelector('.ad-form');
@@ -41,19 +41,19 @@ const priceToType = {
 
 const roomsCapacity = {
   1: {
-    value: [1],
+    values: [1],
     error: 'Только один гость',
   },
   2: {
-    value: [1, 2],
+    values: [1, 2],
     error: 'Не более 2 гостей и не менее 1',
   },
   3: {
-    value: [1, 2, 3],
+    values: [1, 2, 3],
     error: 'Не более 3 гостей и не менее 1',
   },
   100: {
-    value: [0],
+    values: [0],
     error: 'Не для гостей!',
   },
 }
@@ -134,7 +134,7 @@ const onChangeRoomsValidate = () => {
   const currentGuests = guestSelect.value;
   const currentRoom = roomSelect.value;
 
-  if (!roomsCapacity[currentRoom].value.includes(currentGuests)) {
+  if (!roomsCapacity[currentRoom].values.includes(currentGuests)) {
     guestSelect.setCustomValidity(roomsCapacity[currentRoom].error);
   } else {
     guestSelect.setCustomValidity('');
@@ -167,8 +167,8 @@ const validateForm = () => {
   timeOut.addEventListener('change', onSelectCheckChange);
 }
 
-picUploadFunction(avatar, avatarPreview);
-picUploadFunction(images, imagesPreview);
+uploadPicture(avatar, avatarPreview);
+uploadPicture(images, imagesPreview);
 
 export {validateForm};
 
