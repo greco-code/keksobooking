@@ -4,7 +4,8 @@ import {fillAddressInput} from './map.js';
 import {showSendSuccessMessage} from './success.js';
 import {resetMap} from './map.js';
 import {declOfNum} from './util.js';
-import {picUploadFunction} from './picutureUpload.js';
+import {picUploadFunction} from './picuture-upload.js';
+import {resetPreview} from './picuture-upload.js';
 
 const mainForm = document.querySelector('.ad-form');
 const timeIn = mainForm.querySelector('#timein');
@@ -22,11 +23,12 @@ const avatar  = document.querySelector('#avatar');
 const avatarPreview = document.querySelector('.ad-form-header__preview-img')
 const images = document.querySelector('#images');
 const imagesPreview = document.querySelector('.ad-form__photo-preview');
-
-
+const DEFAULT_IMAGE_SRC = 'img/muffin-grey.svg';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const ROOM_SELECT_100 = '100';
+const ROOM_SELECT_0 = '0';
 
 const SYMBOL_WORDS = ['символ', 'символа', 'символов']
 
@@ -75,6 +77,8 @@ const resetForm = () => {
   mainForm.reset();
   onSelectTypeChange();
   fillAddressInput();
+  resetPreview(avatarPreview, DEFAULT_IMAGE_SRC);
+  resetPreview(imagesPreview, DEFAULT_IMAGE_SRC);
 }
 
 resetFormButton.addEventListener('click', (evt) => {
@@ -136,7 +140,7 @@ const onChangeRoomsValidate = () => {
     guestSelect.setCustomValidity('');
   }
 
-  if (roomSelect.value === '100' && guestSelect.value > '0') {
+  if (roomSelect.value === ROOM_SELECT_100 && guestSelect.value > ROOM_SELECT_0) {
     guestSelect.setCustomValidity(roomsCapacity[currentRoom].error);
   } else {
     guestSelect.setCustomValidity('');

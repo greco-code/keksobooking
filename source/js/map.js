@@ -1,7 +1,8 @@
-/* global L:readonly */
-
+import L from 'leaflet';
 import {activateForms, disableForms} from './state.js';
 import {createCard} from './popup.js';
+
+import 'leaflet/dist/leaflet.css';
 
 const INITIAL_LAT = 35.6895000;
 const INITIAL_LNG = 139.6917100;
@@ -32,7 +33,7 @@ L.tileLayer(
 
 const mainMapIcon = L.icon(
   {
-    iconUrl: '../img/main-pin.svg',
+    iconUrl: 'img/main-pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
     iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
@@ -40,7 +41,7 @@ const mainMapIcon = L.icon(
 
 const mapIcon = L.icon(
   {
-    iconUrl: '../img/pin.svg',
+    iconUrl: 'img/pin.svg',
     iconSize: [ICON_WIDTH, ICON_HEIGHT],
     iconAnchor: [ICON_WIDTH / 2, ICON_HEIGHT],
   },
@@ -90,7 +91,7 @@ const resetMap = () => {
 }
 
 fillAddressInput();
-marker.on('move', () => fillAddressInput);
+marker.on('move', () => fillAddressInput());
 
 const cleanMarkers = () => {
   map.closePopup();

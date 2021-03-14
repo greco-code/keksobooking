@@ -1,3 +1,5 @@
+import '../css/normalize.css';
+import '../css/style.css';
 import './popup.js';
 import './form.js';
 import './success.js';

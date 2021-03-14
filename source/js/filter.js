@@ -13,6 +13,7 @@ const LOW_PRICE_VALUE = 'low'
 const MIDDLE_PRICE_VALUE = 'middle'
 const RENDER_DELAY = 500;
 const IMMEDIATE_RENDER = true;
+const CARDS_COUNT = 10;
 
 const PRICE_TRANSLATE = {
   low: 10000,
@@ -43,7 +44,7 @@ const filterByFeatures = (card) => {
     return true;
   }
 
-  for (let feature of checkedFeatures) {
+  for (const feature of checkedFeatures) {
     if (!card.offer.features.includes(feature.value)) {
       return false;
     }
@@ -53,15 +54,15 @@ const filterByFeatures = (card) => {
 }
 
 const filterMarkers = (cards) => {
-  let filteredCards = [];
+  const filteredCards = [];
 
-  for (let card of cards) {
+  for (const card of cards) {
     if (filterByType(card) &&
       filterByRooms(card) &&
       filterByGuests(card) &&
       filterByPrice(card) &&
       filterByFeatures(card) &&
-      filteredCards.length <= 10) {
+      filteredCards.length <= CARDS_COUNT) {
       filteredCards.push(card);
     }
   }
