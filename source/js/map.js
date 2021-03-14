@@ -91,7 +91,7 @@ const resetMap = () => {
 }
 
 fillAddressInput();
-marker.on('move', () => fillAddressInput);
+marker.on('move', () => fillAddressInput());
 
 const cleanMarkers = () => {
   map.closePopup();
