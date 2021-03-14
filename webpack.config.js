@@ -65,10 +65,6 @@ module.exports = {
           from: path.resolve(__dirname, "source/img"),
           to: path.resolve(__dirname, 'build/img'),
         },
-        // {
-        //   from: path.resolve(__dirname, "source/leaflet"),
-        //   to: path.resolve(__dirname, 'build/leaflet'),
-        // },
         {
           from: path.resolve(__dirname, 'source/favicon.ico'),
           to: path.resolve(__dirname, 'build'),
