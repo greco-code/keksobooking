@@ -41,7 +41,9 @@ const debounce = (func, wait, immediate) => {
 
     timeout = setTimeout(setLaterFunc, wait);
 
-    if (callNow) func.apply(context, args);
+    if (callNow) {
+      func.apply(context, args)
+    }
   };
 }
 
