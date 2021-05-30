@@ -24,6 +24,7 @@
     "copy-webpack-plugin": "6.4.1",
     "cross-env": "7.0.3",
     "css-loader": "4.3.0",
+    "gh-pages": "3.2.0",
     "eslint": "7.18.0",
     "eslint-config-htmlacademy": "2.0.0",
     "html-webpack-plugin": "4.5.0",
@@ -38,7 +39,9 @@
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode-development --open",
-    "test": "eslint source/js/"
+    "test": "eslint source/js/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "engines": {
     "node": ">=12.0.0"
