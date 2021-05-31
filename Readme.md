@@ -2,7 +2,7 @@
 
 * Student: [George Nayfonov](https://github.com/greco-code).
 * Mentor: [Alexey Khabirov](https://github.com/Finnko).
-* Build: [Click here](https://greco-code.github.io/1035371-keksobooking-22/)
+* Build: [Click here](https://keksobooking-online.netlify.app)
 
 
 
